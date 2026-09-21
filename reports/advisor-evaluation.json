@@ -1,0 +1,2981 @@
+{
+  "generated_at": "2026-09-20T22:54:17.701471+00:00",
+  "prompt_version": "investigation-ranking-v3",
+  "question_set_sha256": "5bb5a3dbbefc878d2ed76218a036eb291c32d6fa200cb64b9a535ab22c5a7e70",
+  "label_method": "Predefined rule-relevance rubric frozen before inference; no human interpretation-accuracy claim",
+  "limitations": [
+    "Small public/synthetic development and held-out corpus; not a production accuracy estimate",
+    "Prompt v3 includes a post-hoc engineering correction to keyword boundaries and parse priority; these are reused test questions, not a fresh untouched holdout",
+    "Protocol validation does not prove explanation correctness; no human semantic ratings collected",
+    "Cold-process latency includes Python startup, model loading, generation and validation",
+    "Failed model calls use rules in the product, but are not scored as successful model answers"
+  ],
+  "model_requested": true,
+  "model_path": "D:/models/Qwen3-4B-Instruct-2507",
+  "environment": {
+    "model_interpreter": "D:/Project/.venv/Scripts/python.exe",
+    "packages": {
+      "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.16.1"
+    },
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "corpus_sha256": {
+    "dev-broken-dates": "fad04d5b4469f9e00ca7459e63bd8199ac14eef4dd62ad1ee4c3bfb9a728cb55",
+    "dev-broken-numbers": "f73516fd96160ac8de3f0d5d575dc47a62865b3ff9ca3069c584a46c024a10d5",
+    "dev-duplicate-dispatch": "996cd1e2fec58b58407b344eac0afb7b04c12cee0564cffdb207f1db8bd71f7b",
+    "dev-missing-fields": "2e510e8f7e876624cb56bf41e2bdbec776bb593793b04963cce3964a93e9d0ef",
+    "dev-mixed-incident": "9d54d6b3f24c5e4a1d259a281d1fb75d949762e587d31da46310fafd3c028052",
+    "dev-price-spike": "84de45c391480702d30dc12f6fc92b46a1704ee807031c9bea307c4ce4e513ba",
+    "test-broken-dates": "ec7e56fe5ad9ae4bd9f8e6183a07eee9e6b309c5a53100cd25f01249a76a8310",
+    "test-broken-numbers": "4116465731101f124527e76dce1aca8e9378aac1dce72786b6734948c90e2b16",
+    "test-duplicate-dispatch": "a90a9ff67aff6110a840dc9d8c2210c5f21eaef5a1451dcd45ff18a4f3222067",
+    "test-missing-fields": "d05c2fff7d9cc42ed1ace21735661b400986161de8f467688ee93b30011e9a74",
+    "test-mixed-incident": "c3f80e286b04d5026c09dfc44db67f252dc7b0296bcee1d749edea4d4c102bc7",
+    "test-price-spike": "2e3c948a35a5cde92e7098ee5552e906406c421ab16b474f63c278d236740d9d"
+  },
+  "questions": [
+    {
+      "question_id": "dev-month",
+      "split": "dev",
+      "question": "Monthly sales coverage looks incomplete. What should I inspect?",
+      "relevant_rule_ids_in_priority_order": [
+        "date_parse"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6402235f6750cb7c2ba6b304",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_661071c638c221330018c842",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+            "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 0.0002626999921631068,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "date_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": false,
+        "result": {
+          "finding_ids": [
+            "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+            "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "fallback",
+          "elapsed_seconds": 21.63234150002245,
+          "fallback_reason": "numeric_claim: all numeric details must come from the application",
+          "raw_response": "{\"finding_ids\": [\"dev-broken-dates::f_fe891ef0c6dbc7539be720c5\", \"dev-broken-numbers::f_7b2e34711d1c49342c9c7607\", \"dev-missing-fields::f_6591cf140372e91cf034a7c0\"], \"explanation\": \"Invalid or missing date and numeric values prevent accurate monthly sales aggregation.\", \"next_steps\": [\"Verify the raw date values in InvoiceDate for invalid entries like '2011-02-30' and confirm if they should be corrected or excluded.\", \"Inspect rows with missing UnitPrice or Quantity to determine if they are legitimate or require data entry correction.\"]}"
+        },
+        "score": {
+          "top_rule": "date_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "dev-duplicates",
+      "split": "dev",
+      "question": "Which duplicate records need receipt-level review before removal?",
+      "relevant_rule_ids_in_priority_order": [
+        "duplicate_rows"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6402235f6750cb7c2ba6b304",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_661071c638c221330018c842",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_7808c63c888c593780e43298",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_79707340aa54f7b229273aa2",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_bff630b7adf49b808868c922",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-price-spike::f_303ae422e42ae15c3b86515a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-price-spike::f_7fa13e3ca418790ca8dc544c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-dates::f_5196e528eaf366668cab72e5",
+            "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+            "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+            "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+            "dev-duplicate-dispatch::f_adda50ace8902094c665d45c"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 2.859998494386673e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "duplicate_rows",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "dev-broken-dates::f_5196e528eaf366668cab72e5",
+            "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+            "dev-price-spike::f_303ae422e42ae15c3b86515a"
+          ],
+          "explanation": "These findings identify duplicate records with identical source data that require receipt-level review before removal.",
+          "next_steps": [
+            "Verify the invoice and stock code combinations in the original source to confirm if duplicates represent legitimate transactions.",
+            "Compare the receipt-level details (e.g., timestamps, customer info) to determine if any duplicates are truly redundant."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 20.86752859997796,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"dev-broken-dates::f_5196e528eaf366668cab72e5\", \"dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289\", \"dev-price-spike::f_303ae422e42ae15c3b86515a\"], \"explanation\": \"These findings identify duplicate records with identical source data that require receipt-level review before removal.\", \"next_steps\": [\"Verify the invoice and stock code combinations in the original source to confirm if duplicates represent legitimate transactions.\", \"Compare the receipt-level details (e.g., timestamps, customer info) to determine if any duplicates are truly redundant.\"]}"
+        },
+        "score": {
+          "top_rule": "duplicate_rows",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "dev-missing",
+      "split": "dev",
+      "question": "Which missing fields should I verify against the source file?",
+      "relevant_rule_ids_in_priority_order": [
+        "missing_required"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6402235f6750cb7c2ba6b304",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_661071c638c221330018c842",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+            "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+            "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+            "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.0199997127056122e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "missing_required",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+            "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607"
+          ],
+          "explanation": "Missing required fields like UnitPrice and InvoiceNo need verification against the source file.",
+          "next_steps": [
+            "Review the source file to confirm the presence and correctness of UnitPrice and InvoiceNo values.",
+            "Check raw data examples for UnitPrice and InvoiceNo to validate formatting and completeness."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 20.20460319999256,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"dev-missing-fields::f_6591cf140372e91cf034a7c0\", \"dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164\", \"dev-broken-numbers::f_7b2e34711d1c49342c9c7607\"], \"explanation\": \"Missing required fields like UnitPrice and InvoiceNo need verification against the source file.\", \"next_steps\": [\"Review the source file to confirm the presence and correctness of UnitPrice and InvoiceNo values.\", \"Check raw data examples for UnitPrice and InvoiceNo to validate formatting and completeness.\"]}"
+        },
+        "score": {
+          "top_rule": "missing_required",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "dev-numbers",
+      "split": "dev",
+      "question": "Some quantity or price values cannot be parsed. What should I inspect?",
+      "relevant_rule_ids_in_priority_order": [
+        "numeric_parse"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_f735c489014c522a584b5668",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual prices within one product",
+          "column": "UnitPrice",
+          "explanation": "Prices outside the product's three-IQR range are review candidates, not proven errors. No correction or exclusion is automatic.",
+          "evidence_excerpt": "{\"product_id\": \"22352\", \"valid_prices\": \"11\", \"q1\": \"2.55\", \"q3\": \"2.55\", \"iqr\": \"0.00\", \"lower_bound\": \"2.55\"}"
+        },
+        {
+          "finding_id": "dev-price-spike::f_94c748225e05f6d09a323ad5",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual prices within one product",
+          "column": "UnitPrice",
+          "explanation": "Prices outside the product's three-IQR range are review candidates, not proven errors. No correction or exclusion is automatic.",
+          "evidence_excerpt": "{\"product_id\": \"47566B\", \"valid_prices\": \"11\", \"q1\": \"4.95\", \"q3\": \"4.95\", \"iqr\": \"0.00\", \"lower_bound\": \"4.95\"}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+            "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+            "dev-broken-dates::f_fe891ef0c6dbc7539be720c5"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.429999924264848e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0"
+          ],
+          "explanation": "The question focuses on unparsable quantity or price values. These findings directly identify raw data that fails numeric parsing or is missing required values.",
+          "next_steps": [
+            "Review the raw examples of invalid numbers in UnitPrice and Quantity to verify formatting issues.",
+            "Check for missing UnitPrice or InvoiceNo values to confirm whether they are data gaps or typos."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 21.563235799985705,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"dev-broken-numbers::f_7b2e34711d1c49342c9c7607\", \"dev-broken-numbers::f_ff65f412fdd271078f570a0e\", \"dev-missing-fields::f_6591cf140372e91cf034a7c0\"], \"explanation\": \"The question focuses on unparsable quantity or price values. These findings directly identify raw data that fails numeric parsing or is missing required values.\", \"next_steps\": [\"Review the raw examples of invalid numbers in UnitPrice and Quantity to verify formatting issues.\", \"Check for missing UnitPrice or InvoiceNo values to confirm whether they are data gaps or typos.\"]}"
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "dev-price",
+      "split": "dev",
+      "question": "Which unusual product prices might be legitimate special offers?",
+      "relevant_rule_ids_in_priority_order": [
+        "price_outlier"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-mixed-incident::f_f735c489014c522a584b5668",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual prices within one product",
+          "column": "UnitPrice",
+          "explanation": "Prices outside the product's three-IQR range are review candidates, not proven errors. No correction or exclusion is automatic.",
+          "evidence_excerpt": "{\"product_id\": \"22352\", \"valid_prices\": \"11\", \"q1\": \"2.55\", \"q3\": \"2.55\", \"iqr\": \"0.00\", \"lower_bound\": \"2.55\"}"
+        },
+        {
+          "finding_id": "dev-price-spike::f_94c748225e05f6d09a323ad5",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual prices within one product",
+          "column": "UnitPrice",
+          "explanation": "Prices outside the product's three-IQR range are review candidates, not proven errors. No correction or exclusion is automatic.",
+          "evidence_excerpt": "{\"product_id\": \"47566B\", \"valid_prices\": \"11\", \"q1\": \"4.95\", \"q3\": \"4.95\", \"iqr\": \"0.00\", \"lower_bound\": \"4.95\"}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-mixed-incident::f_f735c489014c522a584b5668",
+            "dev-price-spike::f_94c748225e05f6d09a323ad5",
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.2499985536560416e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "price_outlier",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "dev-mixed-incident::f_f735c489014c522a584b5668",
+            "dev-price-spike::f_94c748225e05f6d09a323ad5",
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607"
+          ],
+          "explanation": "These findings identify unusual product prices that may represent special offers, as they fall outside typical price ranges. However, such outliers require manual review to confirm legitimacy.",
+          "next_steps": [
+            "Verify the context of the unusual prices in the original sales records.",
+            "Check if the product descriptions or promotional notes support the pricing as a legitimate special offer."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 21.431250499997986,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"dev-mixed-incident::f_f735c489014c522a584b5668\", \"dev-price-spike::f_94c748225e05f6d09a323ad5\", \"dev-broken-numbers::f_7b2e34711d1c49342c9c7607\"], \"explanation\": \"These findings identify unusual product prices that may represent special offers, as they fall outside typical price ranges. However, such outliers require manual review to confirm legitimacy.\", \"next_steps\": [\"Verify the context of the unusual prices in the original sales records.\", \"Check if the product descriptions or promotional notes support the pricing as a legitimate special offer.\"]}"
+        },
+        "score": {
+          "top_rule": "price_outlier",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "dev-coverage",
+      "split": "dev",
+      "question": "The monetary total omits records with unreadable values. What should I check?",
+      "relevant_rule_ids_in_priority_order": [
+        "numeric_parse",
+        "missing_required"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6402235f6750cb7c2ba6b304",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_661071c638c221330018c842",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+            "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.090000245720148e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 0.5
+        }
+      },
+      "qwen": {
+        "accepted": false,
+        "result": {
+          "finding_ids": [
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+            "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "fallback",
+          "elapsed_seconds": 22.169249800004764,
+          "fallback_reason": "numeric_claim: all numeric details must come from the application",
+          "raw_response": "{\"finding_ids\": [\"dev-broken-numbers::f_7b2e34711d1c49342c9c7607\", \"dev-broken-numbers::f_ff65f412fdd271078f570a0e\", \"dev-missing-fields::f_6591cf140372e91cf034a7c0\"], \"explanation\": \"The monetary total omits records due to unreadable or missing values in UnitPrice and Quantity fields, which are required for calculating amounts.\", \"next_steps\": [\"Verify raw values in UnitPrice and Quantity columns for parsing errors or text entries like 'two' or '1.2.3'.\", \"Check for blank UnitPrice entries and confirm if they should be excluded or corrected based on business context.\"]}"
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 0.5
+        }
+      }
+    },
+    {
+      "question_id": "test-month",
+      "split": "test",
+      "question": "Transactions show money but do not appear in a reporting period. Which leads matter?",
+      "relevant_rule_ids_in_priority_order": [
+        "date_parse"
+      ],
+      "corpus_finding_count": 31,
+      "model_candidates": [
+        {
+          "finding_id": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_0d0f18552583844b24484f76",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_57431c44fb54e698fd38387e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_a8452081a027d971b3cad795",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_623237f28bea9c06ad329859",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_a0168081c9cbd506a096681f",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_070185af37849eb27a5861c7",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_af6308a4ffd7e03f516ffd3d",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_d4722c61df50edf7ebc505a6",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+            "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.880000440403819e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "date_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": false,
+        "result": {
+          "finding_ids": [
+            "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+            "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "fallback",
+          "elapsed_seconds": 21.784554099984234,
+          "fallback_reason": "numeric_claim: all numeric details must come from the application",
+          "raw_response": "{\"finding_ids\": [\"test-broken-dates::f_abe7e2cf30987f368a3f68a2\", \"test-mixed-incident::f_95a7af50bdfdb2f093f72c7b\", \"test-missing-fields::f_57431c44fb54e698fd38387e\"], \"explanation\": \"Invalid or missing date values and required fields could cause transactions to be excluded from reporting periods even if money is recorded.\", \"next_steps\": [\"Verify the InvoiceDate values for invalid dates like '2011-02-30' and confirm if they should be corrected or excluded.\", \"Check rows with missing InvoiceNo or UnitPrice to ensure they are not excluded from reporting due to missing required fields.\"]}"
+        },
+        "score": {
+          "top_rule": "date_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "test-duplicates",
+      "split": "test",
+      "question": "A file may have been pasted into itself. Which suspect rows should I inspect?",
+      "relevant_rule_ids_in_priority_order": [
+        "duplicate_rows"
+      ],
+      "corpus_finding_count": 31,
+      "model_candidates": [
+        {
+          "finding_id": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_0d0f18552583844b24484f76",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_57431c44fb54e698fd38387e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_a8452081a027d971b3cad795",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_623237f28bea9c06ad329859",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_a0168081c9cbd506a096681f",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_070185af37849eb27a5861c7",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_af6308a4ffd7e03f516ffd3d",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_d4722c61df50edf7ebc505a6",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76",
+            "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+            "test-missing-fields::f_57431c44fb54e698fd38387e"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.789999755099416e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": false,
+          "relevant_rule_recall_at_three": 0.0
+        }
+      },
+      "qwen": {
+        "accepted": false,
+        "result": {
+          "finding_ids": [
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76",
+            "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+            "test-missing-fields::f_57431c44fb54e698fd38387e"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "fallback",
+          "elapsed_seconds": 23.022167699993588,
+          "fallback_reason": "numeric_claim: all numeric details must come from the application",
+          "raw_response": "{\"finding_ids\": [\"test-broken-dates::f_abe7e2cf30987f368a3f68a2\", \"test-mixed-incident::f_95a7af50bdfdb2f093f72c7b\", \"test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4\"], \"explanation\": \"Rows with invalid dates or unparsable numbers may result from data being pasted into itself, especially if formatting or content is duplicated or corrupted.\", \"next_steps\": [\"Verify the raw content of rows with invalid dates (e.g., '2011-02-30') to confirm if they are duplicates or pasted content.\", \"Inspect rows with non-numeric values like 'two' or '1.2.3' in Quantity or UnitPrice to determine if they stem from a copy-paste error.\"]}"
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": false,
+          "relevant_rule_recall_at_three": 0.0
+        }
+      }
+    },
+    {
+      "question_id": "test-missing",
+      "split": "test",
+      "question": "Some order identifiers were left blank. Which evidence can help me verify them?",
+      "relevant_rule_ids_in_priority_order": [
+        "missing_required"
+      ],
+      "corpus_finding_count": 31,
+      "model_candidates": [
+        {
+          "finding_id": "test-missing-fields::f_57431c44fb54e698fd38387e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_a8452081a027d971b3cad795",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_0d0f18552583844b24484f76",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_623237f28bea9c06ad329859",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_a0168081c9cbd506a096681f",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_070185af37849eb27a5861c7",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_af6308a4ffd7e03f516ffd3d",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_d4722c61df50edf7ebc505a6",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "test-missing-fields::f_57431c44fb54e698fd38387e",
+            "test-missing-fields::f_a8452081a027d971b3cad795",
+            "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+            "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.400002606213093e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "missing_required",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "test-missing-fields::f_57431c44fb54e698fd38387e",
+            "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+            "test-broken-dates::f_abe7e2cf30987f368a3f68a2"
+          ],
+          "explanation": "These findings directly relate to missing or invalid order identifiers and date fields that could affect the integrity of order records.",
+          "next_steps": [
+            "Review the evidence excerpts for blank 'order_id' fields to verify which records lack an invoice number.",
+            "Check the date parsing errors to ensure invoice dates are valid and not causing downstream issues in order validation."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 20.533202299993718,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"test-missing-fields::f_57431c44fb54e698fd38387e\", \"test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005\", \"test-broken-dates::f_abe7e2cf30987f368a3f68a2\"], \"explanation\": \"These findings directly relate to missing or invalid order identifiers and date fields that could affect the integrity of order records.\", \"next_steps\": [\"Review the evidence excerpts for blank 'order_id' fields to verify which records lack an invoice number.\", \"Check the date parsing errors to ensure invoice dates are valid and not causing downstream issues in order validation.\"]}"
+        },
+        "score": {
+          "top_rule": "missing_required",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "test-numbers",
+      "split": "test",
+      "question": "I suspect malformed quantities are excluding transactions from the total. Where should I start?",
+      "relevant_rule_ids_in_priority_order": [
+        "numeric_parse"
+      ],
+      "corpus_finding_count": 31,
+      "model_candidates": [
+        {
+          "finding_id": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_0d0f18552583844b24484f76",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_57431c44fb54e698fd38387e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_a8452081a027d971b3cad795",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_623237f28bea9c06ad329859",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_a0168081c9cbd506a096681f",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_070185af37849eb27a5861c7",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_af6308a4ffd7e03f516ffd3d",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_d4722c61df50edf7ebc505a6",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76",
+            "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+            "test-missing-fields::f_57431c44fb54e698fd38387e"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.500000457279384e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": false,
+        "result": {
+          "finding_ids": [
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76",
+            "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+            "test-missing-fields::f_57431c44fb54e698fd38387e"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "fallback",
+          "elapsed_seconds": 21.010164600011194,
+          "fallback_reason": "numeric_claim: all numeric details must come from the application",
+          "raw_response": "{\"finding_ids\": [\"test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4\", \"test-broken-numbers::f_fcc95c77102a6179cf114a1c\", \"test-mixed-incident::f_0d0f18552583844b24484f76\"], \"explanation\": \"Malformed quantities and unit prices prevent transactions from being processed, which could exclude them from totals.\", \"next_steps\": [\"Verify raw values in the Quantity and UnitPrice columns for non-numeric entries like 'two' or '1.2.3'.\", \"Check a preview of the repair to confirm whether these malformed entries would be corrected or excluded.\"] }"
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "test-price",
+      "split": "test",
+      "question": "An item has an unusually expensive sale. Which candidate should I verify before changing it?",
+      "relevant_rule_ids_in_priority_order": [
+        "price_outlier"
+      ],
+      "corpus_finding_count": 31,
+      "model_candidates": [
+        {
+          "finding_id": "test-mixed-incident::f_672e5fc98e338fb7e0bb6156",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual prices within one product",
+          "column": "UnitPrice",
+          "explanation": "Prices outside the product's three-IQR range are review candidates, not proven errors. No correction or exclusion is automatic.",
+          "evidence_excerpt": "{\"product_id\": \"22791\", \"valid_prices\": \"11\", \"q1\": \"1.25\", \"q3\": \"1.25\", \"iqr\": \"0.00\", \"lower_bound\": \"1.25\"}"
+        },
+        {
+          "finding_id": "test-price-spike::f_09f1e10c5be472dccda50fa6",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual prices within one product",
+          "column": "UnitPrice",
+          "explanation": "Prices outside the product's three-IQR range are review candidates, not proven errors. No correction or exclusion is automatic.",
+          "evidence_excerpt": "{\"product_id\": \"21327\", \"valid_prices\": \"11\", \"q1\": \"1.65\", \"q3\": \"1.65\", \"iqr\": \"0.00\", \"lower_bound\": \"1.65\"}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_0d0f18552583844b24484f76",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_57431c44fb54e698fd38387e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_a8452081a027d971b3cad795",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_623237f28bea9c06ad329859",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_a0168081c9cbd506a096681f",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_070185af37849eb27a5861c7",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "test-mixed-incident::f_672e5fc98e338fb7e0bb6156",
+            "test-price-spike::f_09f1e10c5be472dccda50fa6",
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.4500000765547156e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "price_outlier",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "test-mixed-incident::f_672e5fc98e338fb7e0bb6156",
+            "test-price-spike::f_09f1e10c5be472dccda50fa6",
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4"
+          ],
+          "explanation": "These findings identify potential price outliers and malformed numeric values that could affect the validity of an unusually expensive sale.",
+          "next_steps": [
+            "Verify the raw price and product details for the flagged sale in the original data source.",
+            "Check if the price outlier is due to a data entry error or a legitimate special offer by reviewing the transaction context."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 20.695948199980194,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"test-mixed-incident::f_672e5fc98e338fb7e0bb6156\", \"test-price-spike::f_09f1e10c5be472dccda50fa6\", \"test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4\"], \"explanation\": \"These findings identify potential price outliers and malformed numeric values that could affect the validity of an unusually expensive sale.\", \"next_steps\": [\"Verify the raw price and product details for the flagged sale in the original data source.\", \"Check if the price outlier is due to a data entry error or a legitimate special offer by reviewing the transaction context.\"]}"
+        },
+        "score": {
+          "top_rule": "price_outlier",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      }
+    },
+    {
+      "question_id": "test-coverage",
+      "split": "test",
+      "question": "Before trusting revenue, I want to investigate values that cannot be interpreted as money. Which lead first?",
+      "relevant_rule_ids_in_priority_order": [
+        "numeric_parse",
+        "missing_required"
+      ],
+      "corpus_finding_count": 31,
+      "model_candidates": [
+        {
+          "finding_id": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_0d0f18552583844b24484f76",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [{\"raw\": \"1.2.3\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numbers cannot be parsed: Quantity",
+          "column": "Quantity",
+          "explanation": "These rows cannot contribute an amount until quantity and unit price parse under the confirmed settings.",
+          "evidence_excerpt": "{\"field\": \"quantity\", \"count\": \"1\", \"examples\": [{\"raw\": \"two\", \"reason\": \"Number does not match the confirmed decimal/thousands format; exponent notation is not accepted.\"}]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_57431c44fb54e698fd38387e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-missing-fields::f_a8452081a027d971b3cad795",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: InvoiceNo",
+          "column": "InvoiceNo",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"order_id\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required values are missing: UnitPrice",
+          "column": "UnitPrice",
+          "explanation": "Blank required cells need investigation. No values have been filled or excluded automatically.",
+          "evidence_excerpt": "{\"field\": \"unit_price\", \"count\": \"1\", \"examples\": [\"\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates do not match the confirmed format",
+          "column": "InvoiceDate",
+          "explanation": "Amounts with valid quantity and price still count toward net sales, but remain outside monthly totals.",
+          "evidence_excerpt": "{\"format\": \"%Y-%m-%d %H:%M:%S\", \"count\": \"2\", \"examples\": [{\"raw\": \"2011-02-30 09:15:00\"}, {\"raw\": \"not-a-date\"}]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_623237f28bea9c06ad329859",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-dates::f_a0168081c9cbd506a096681f",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_070185af37849eb27a5861c7",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_af6308a4ffd7e03f516ffd3d",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_d4722c61df50edf7ebc505a6",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Identical source records need review",
+          "column": "",
+          "explanation": "Every source column matches. Repeated records may still be legitimate; select specific rows before exclusion. An order ID alone is never a duplicate key.",
+          "evidence_excerpt": "{\"count\": \"2\", \"compared_columns\": [\"InvoiceNo\", \"StockCode\"]}"
+        }
+      ],
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76",
+            "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+            "test-missing-fields::f_57431c44fb54e698fd38387e"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 4.169999738223851e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 0.5
+        }
+      },
+      "qwen": {
+        "accepted": false,
+        "result": {
+          "finding_ids": [
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76",
+            "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+            "test-missing-fields::f_57431c44fb54e698fd38387e"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "fallback",
+          "elapsed_seconds": 22.102169799996773,
+          "fallback_reason": "numeric_claim: all numeric details must come from the application",
+          "raw_response": "{\"finding_ids\": [\"test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4\", \"test-broken-numbers::f_fcc95c77102a6179cf114a1c\", \"test-mixed-incident::f_0d0f18552583844b24484f76\"], \"explanation\": \"These findings identify raw values that cannot be interpreted as numbers, such as 'two' or '1.2.3', which are invalid for monetary calculations.\", \"next_steps\": [\"Verify the raw values in the Quantity and UnitPrice columns to confirm they are non-numeric or malformed.\", \"Check if these entries correspond to valid transactions or data entry errors before including them in revenue calculations.\"]}"
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 0.5
+        }
+      }
+    }
+  ],
+  "model_config_sha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+  "summary": {
+    "rules": {
+      "scored_queries": 12,
+      "top_priority_accuracy": 0.9166666666666666,
+      "mean_relevant_rule_recall_at_three": 0.8333333333333334,
+      "mean_elapsed_seconds": 5.34249993506819e-05
+    },
+    "qwen_accepted_only": {
+      "scored_queries": 6,
+      "top_priority_accuracy": 1,
+      "mean_relevant_rule_recall_at_three": 1.0,
+      "mean_elapsed_seconds": 20.882628099988022
+    },
+    "attempted_model_calls": 12,
+    "fallback_count": 6,
+    "protocol_acceptance_rate": 0.5,
+    "product_with_fallback": {
+      "scored_queries": 12,
+      "top_priority_accuracy": 0.9166666666666666,
+      "mean_relevant_rule_recall_at_three": 0.8333333333333334,
+      "mean_elapsed_seconds": 21.418034674995095
+    },
+    "failure_categories": {
+      "schema": 0,
+      "citation": 0,
+      "numeric_claim": 6,
+      "unsupported_assertion": 0,
+      "timeout": 0,
+      "worker_failure": 0,
+      "unavailable": 0
+    },
+    "cold_call_median_seconds": 21.497243149991846,
+    "cold_call_max_seconds": 23.022167699993588
+  }
+}

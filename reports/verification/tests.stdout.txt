@@ -1,0 +1,11 @@
+........................................................................ [ 39%]
+........................................................................ [ 79%]
+......................................                                   [100%]
+============================== warnings summary ===============================
+.venv-clean\Lib\site-packages\dateutil\tz\tz.py:37
+  D:\Project\data-detective\.venv-clean\Lib\site-packages\dateutil\tz\tz.py:37: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).
+    EPOCH = datetime.datetime.utcfromtimestamp(0)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: D:\Project\data-detective\reports\verification\pytest.xml -
+182 passed, 1 warning in 9.06s

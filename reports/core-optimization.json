@@ -1,0 +1,292 @@
+{
+  "schema_version": 1,
+  "started_at": "2026-09-21T00:05:18.598735+00:00",
+  "completed_at": "2026-09-21T00:05:25.324477+00:00",
+  "command": ".venv-clean/Scripts/python.exe scripts/benchmark_core.py --out reports/core-optimization.json",
+  "comparison": {
+    "type": "Controlled serializer substitution with the current engine in both variants",
+    "baseline_reconstruction": "def legacy_to_dict(version: DatasetVersion) -> dict[str, Any]:\n    \"\"\"Exact pre-optimization DatasetVersion.to_dict body, reconstructed locally.\"\"\"\n    return asdict(version)\n",
+    "current_implementation": "    def to_dict(self) -> dict[str, Any]:\n        # Cells are strings, so copying their containers is enough to return a\n        # detached JSON value. dataclasses.asdict recursively deep-copies every\n        # scalar in 50,000-row snapshots during preview, hashing and publication.\n        return {\n            \"version_id\": self.version_id,\n            \"dataset_id\": self.dataset_id,\n            \"parent_version_id\": self.parent_version_id,\n            \"columns\": list(self.columns),\n            \"rows\": [{\"row_id\": row.row_id, \"values\": dict(row.values), \"excluded\": row.excluded}\n                     for row in self.rows],\n            \"mapping\": asdict(self.mapping),\n            \"settings\": asdict(self.settings),\n            \"created_at\": self.created_at,\n            \"description\": self.description,\n        }\n",
+    "patch": "unittest.mock.patch.object(DatasetVersion, 'to_dict', serializer); no source edits",
+    "limits": [
+      "This restores only the former serializer, not an entire historical application revision.",
+      "Single-machine warm synthetic observation; three repeats are not a statistical guarantee.",
+      "No memory, UI, disk persistence, CSV parsing, GPU or model performance claim is made.",
+      "Fresh traceable results supersede earlier unrecorded conversational measurements."
+    ]
+  },
+  "input": {
+    "construction": "def fixture() -> tuple[DatasetVersion, RepairPlan]:\n    columns = [\"order\", \"product\", \"qty\", \"price\", \"date\"]\n    rows = [\n        DataRow(str(index), dict(zip(columns, [\n            str(index), str(index % 500), \"1\", \"1.2345\", \"2024-01-01\",\n        ], strict=True)))\n        for index in range(ROWS)\n    ]\n    version = DatasetVersion(\n        \"v\", \"d\", None, columns, rows, ColumnMap(*columns), ParseSettings(\"%Y-%m-%d\"),\n    )\n    plan = RepairPlan(\"v\", [RepairOperation(\"set_cell\", [\"0\"], \"qty\", \"2\")], \"verified source\")\n    return version, plan\n",
+    "rows": 50000,
+    "columns": [
+      "order",
+      "product",
+      "qty",
+      "price",
+      "date"
+    ],
+    "distinct_products": 500,
+    "distinct_dates": 1,
+    "excluded_rows": 0,
+    "canonical_snapshot_bytes": 6267166,
+    "canonical_snapshot_sha256": "3b1844eb32c7771e45a2bd98a9cd16d38b1bf3b538b5d3112acf9e8751ec7013",
+    "canonicalization": "UTF-8 JSON, ensure_ascii=False, sort_keys=True, separators=(',', ':')",
+    "plan": {
+      "base_version_id": "v",
+      "operations": [
+        {
+          "kind": "set_cell",
+          "row_ids": [
+            "0"
+          ],
+          "column": "qty",
+          "value": "2",
+          "settings": null
+        }
+      ],
+      "reason": "verified source"
+    },
+    "plan_sha256": "3ba32a54de40ff12fd3df2d0533eab1c61823809bca5a5fa77fb83c6478f09c7",
+    "expected_metrics": {
+      "before": {
+        "total_rows": 50000,
+        "included_rows": 50000,
+        "excluded_rows": 0,
+        "amount_rows": 50000,
+        "invalid_amount_rows": 0,
+        "net_amount": "61725.00",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2024-01": "61725.00"
+        },
+        "currency": "GBP"
+      },
+      "after": {
+        "total_rows": 50000,
+        "included_rows": 50000,
+        "excluded_rows": 0,
+        "amount_rows": 50000,
+        "invalid_amount_rows": 0,
+        "net_amount": "61726.2345",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2024-01": "61726.2345"
+        },
+        "currency": "GBP"
+      },
+      "amount_delta": "1.2345",
+      "monthly_delta": {
+        "2024-01": "1.2345"
+      },
+      "fingerprint": "c0502c65866757bb1ddb608177b5a0df0433796ae302757ea0b05aede68dd684"
+    }
+  },
+  "measurement_policy": {
+    "repeats_per_scope_per_variant": 3,
+    "warmups_per_scope_per_variant": 1,
+    "additional_reference_preview": "One untimed current-engine preview before warm-ups for semantic checks",
+    "variant_order": "Baseline/current in repeats 1 and 3; current/baseline in repeat 2",
+    "clock": "time.perf_counter_ns",
+    "gc": "gc.collect before each measured call, outside the timer; normal automatic GC retained",
+    "snapshot_to_dict": "One complete DatasetVersion.to_dict allocation, no JSON encoding",
+    "complete_preview": "One complete preview_repair: validation, copying, before/after analysis, Decimal deltas, new UUID/time and canonical source/plan fingerprint",
+    "excluded": [
+      "Input construction",
+      "CSV decoding",
+      "patch setup/teardown",
+      "explicit gc.collect",
+      "correctness checks",
+      "result disposal",
+      "disk/SQLite",
+      "UI",
+      "model",
+      "report writing"
+    ]
+  },
+  "environment": {
+    "executable": "D:\\Project\\data-detective\\.venv-clean\\Scripts\\python.exe",
+    "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "processor": "Intel64 Family 6 Model 183 Stepping 1, GenuineIntel",
+    "logical_cpus": 20,
+    "prefix": "D:\\Project\\data-detective\\.venv-clean",
+    "base_prefix": "C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312",
+    "venv_config": "home = C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\ninclude-system-site-packages = false\nversion = 3.12.0\nexecutable = D:\\Project\\data-detective\\.venv\\Scripts\\python.exe\ncommand = D:\\Project\\data-detective\\.venv\\Scripts\\python.exe -m venv D:\\Project\\data-detective\\.venv-clean\n",
+    "packages": {
+      "data-detective": "0.1.0",
+      "pandas": "2.3.3",
+      "streamlit": "1.64.0",
+      "plotly": "6.9.0",
+      "numpy": "1.26.2"
+    },
+    "gc_enabled": true,
+    "gc_thresholds": [
+      700,
+      10,
+      10
+    ],
+    "perf_counter": {
+      "implementation": "QueryPerformanceCounter()",
+      "monotonic": true,
+      "adjustable": false,
+      "resolution": 1e-07
+    }
+  },
+  "source_sha256_before": {
+    "scripts/benchmark_core.py": "d880abbb2b2d002f59a678e2835f3f6c415be41815099be098edc2af53646d7b",
+    "src/data_detective/models.py": "61598c30a4ad33435b28822a71f3e066ee10a24e71636f2a206551eaf0c924fb",
+    "src/data_detective/engine.py": "09b7829f4442a841584caca511190224d00ea3795b15f3450a870ba85ea9f2f9"
+  },
+  "source_sha256_after": {
+    "scripts/benchmark_core.py": "d880abbb2b2d002f59a678e2835f3f6c415be41815099be098edc2af53646d7b",
+    "src/data_detective/models.py": "61598c30a4ad33435b28822a71f3e066ee10a24e71636f2a206551eaf0c924fb",
+    "src/data_detective/engine.py": "09b7829f4442a841584caca511190224d00ea3795b15f3450a870ba85ea9f2f9"
+  },
+  "source_unchanged_during_run": true,
+  "dependency_lock_sha256": {
+    "requirements-windows.lock": "05cd2aabc6fdb5ad003043e1b68534e7bb1f325cc982499785d62e4df759b422",
+    "requirements-dev-windows.lock": "309ad4f14af22ac07c8c63b08e5abf4abf4bc9815ab7758cb859c387b5c4ee86"
+  },
+  "correctness": {
+    "serializer_outputs_equal": true,
+    "measured_outputs_verified": 12,
+    "preview_semantic_sha256": "d503a10fba62a9e3bce063fdc3fdc561e0115b49379f20c10225029543f7d486",
+    "preview_comparison_excludes": [
+      "random new version IDs",
+      "created_at",
+      "analysis elapsed_seconds"
+    ],
+    "input_unchanged": true
+  },
+  "measurements": [
+    {
+      "scope": "snapshot_to_dict",
+      "variant": "legacy_asdict",
+      "repeat": 1,
+      "position_in_pair": 1,
+      "elapsed_ns": 115854200,
+      "elapsed_seconds": 0.1158542,
+      "semantic_sha256": "3b1844eb32c7771e45a2bd98a9cd16d38b1bf3b538b5d3112acf9e8751ec7013"
+    },
+    {
+      "scope": "snapshot_to_dict",
+      "variant": "current_detached_containers",
+      "repeat": 1,
+      "position_in_pair": 2,
+      "elapsed_ns": 18464100,
+      "elapsed_seconds": 0.0184641,
+      "semantic_sha256": "3b1844eb32c7771e45a2bd98a9cd16d38b1bf3b538b5d3112acf9e8751ec7013"
+    },
+    {
+      "scope": "snapshot_to_dict",
+      "variant": "current_detached_containers",
+      "repeat": 2,
+      "position_in_pair": 1,
+      "elapsed_ns": 18535800,
+      "elapsed_seconds": 0.0185358,
+      "semantic_sha256": "3b1844eb32c7771e45a2bd98a9cd16d38b1bf3b538b5d3112acf9e8751ec7013"
+    },
+    {
+      "scope": "snapshot_to_dict",
+      "variant": "legacy_asdict",
+      "repeat": 2,
+      "position_in_pair": 2,
+      "elapsed_ns": 118162200,
+      "elapsed_seconds": 0.1181622,
+      "semantic_sha256": "3b1844eb32c7771e45a2bd98a9cd16d38b1bf3b538b5d3112acf9e8751ec7013"
+    },
+    {
+      "scope": "snapshot_to_dict",
+      "variant": "legacy_asdict",
+      "repeat": 3,
+      "position_in_pair": 1,
+      "elapsed_ns": 115329700,
+      "elapsed_seconds": 0.1153297,
+      "semantic_sha256": "3b1844eb32c7771e45a2bd98a9cd16d38b1bf3b538b5d3112acf9e8751ec7013"
+    },
+    {
+      "scope": "snapshot_to_dict",
+      "variant": "current_detached_containers",
+      "repeat": 3,
+      "position_in_pair": 2,
+      "elapsed_ns": 19196300,
+      "elapsed_seconds": 0.0191963,
+      "semantic_sha256": "3b1844eb32c7771e45a2bd98a9cd16d38b1bf3b538b5d3112acf9e8751ec7013"
+    },
+    {
+      "scope": "complete_preview",
+      "variant": "legacy_asdict",
+      "repeat": 1,
+      "position_in_pair": 1,
+      "elapsed_ns": 592198200,
+      "elapsed_seconds": 0.5921982,
+      "semantic_sha256": "d503a10fba62a9e3bce063fdc3fdc561e0115b49379f20c10225029543f7d486"
+    },
+    {
+      "scope": "complete_preview",
+      "variant": "current_detached_containers",
+      "repeat": 1,
+      "position_in_pair": 2,
+      "elapsed_ns": 477339400,
+      "elapsed_seconds": 0.4773394,
+      "semantic_sha256": "d503a10fba62a9e3bce063fdc3fdc561e0115b49379f20c10225029543f7d486"
+    },
+    {
+      "scope": "complete_preview",
+      "variant": "current_detached_containers",
+      "repeat": 2,
+      "position_in_pair": 1,
+      "elapsed_ns": 495821500,
+      "elapsed_seconds": 0.4958215,
+      "semantic_sha256": "d503a10fba62a9e3bce063fdc3fdc561e0115b49379f20c10225029543f7d486"
+    },
+    {
+      "scope": "complete_preview",
+      "variant": "legacy_asdict",
+      "repeat": 2,
+      "position_in_pair": 2,
+      "elapsed_ns": 565489600,
+      "elapsed_seconds": 0.5654896,
+      "semantic_sha256": "d503a10fba62a9e3bce063fdc3fdc561e0115b49379f20c10225029543f7d486"
+    },
+    {
+      "scope": "complete_preview",
+      "variant": "legacy_asdict",
+      "repeat": 3,
+      "position_in_pair": 1,
+      "elapsed_ns": 583471800,
+      "elapsed_seconds": 0.5834718,
+      "semantic_sha256": "d503a10fba62a9e3bce063fdc3fdc561e0115b49379f20c10225029543f7d486"
+    },
+    {
+      "scope": "complete_preview",
+      "variant": "current_detached_containers",
+      "repeat": 3,
+      "position_in_pair": 2,
+      "elapsed_ns": 470050600,
+      "elapsed_seconds": 0.4700506,
+      "semantic_sha256": "d503a10fba62a9e3bce063fdc3fdc561e0115b49379f20c10225029543f7d486"
+    }
+  ],
+  "summary": {
+    "snapshot_to_dict": {
+      "median_seconds": {
+        "legacy_asdict": 0.1158542,
+        "current_detached_containers": 0.0185358
+      },
+      "baseline_over_current_ratio": 6.250294025615296,
+      "median_time_reduction_percent": 84.00075267016646
+    },
+    "complete_preview": {
+      "median_seconds": {
+        "legacy_asdict": 0.5834718,
+        "current_detached_containers": 0.4773394
+      },
+      "baseline_over_current_ratio": 1.2223415875580352,
+      "median_time_reduction_percent": 18.189807973581583
+    }
+  }
+}

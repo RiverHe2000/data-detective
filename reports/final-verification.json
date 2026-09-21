@@ -1,0 +1,466 @@
+{
+  "status": "pass",
+  "started_at": "2026-09-20T23:01:58.430349+00:00",
+  "finished_at": "2026-09-20T23:02:46.860372+00:00",
+  "environment": {
+    "prefix": "D:\\Project\\data-detective\\.venv-clean",
+    "base_prefix": "C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312",
+    "python": "3.12.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "new_environment_created_for_this_run": false,
+    "initial_fresh_install_report": "reports/clean-install.json",
+    "include_system_site_packages": false,
+    "user_site_enabled": false,
+    "external_site_package_paths": [],
+    "environment_overrides": {
+      "PYTHONUTF8": "1",
+      "PYTHONIOENCODING": "utf-8",
+      "PYTHONNOUSERSITE": "1"
+    },
+    "note": "Reused the independently isolated .venv-clean created and freshly installed during the earlier clean-install verification; this is a final source/packaging recheck, not a new clean installation."
+  },
+  "checks": {
+    "regenerate_locks": {
+      "command": [
+        ".venv/Scripts/python.exe",
+        "scripts/lock_dependencies.py"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.423,
+      "stdout": "{\n  \"source_prefix\": \"D:\\\\Project\\\\data-detective\\\\.venv\",\n  \"python\": \"3.12.0\",\n  \"locks\": [\n    {\n      \"path\": \"requirements-windows.lock\",\n      \"packages\": 39,\n      \"sha256\": \"05cd2aabc6fdb5ad003043e1b68534e7bb1f325cc982499785d62e4df759b422\"\n    },\n    {\n      \"path\": \"requirements-dev-windows.lock\",\n      \"packages\": 46,\n      \"sha256\": \"309ad4f14af22ac07c8c63b08e5abf4abf4bc9815ab7758cb859c387b5c4ee86\"\n    }\n  ]\n}",
+      "stderr": "",
+      "environment_note": "The source .venv is allowed its existing installed metadata visibility, including inherited user/system packages. The verification .venv-clean remains fully isolated."
+    },
+    "editable_install": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-deps",
+        "-e",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.378,
+      "stdout": "Obtaining file:///D:/Project/data-detective\n  Installing build dependencies: started\n  Installing build dependencies: finished with status 'done'\n  Checking if build backend supports build_editable: started\n  Checking if build backend supports build_editable: finished with status 'done'\n  Getting requirements to build editable: started\n  Getting requirements to build editable: finished with status 'done'\n  Preparing editable metadata (pyproject.toml): started\n  Preparing editable metadata (pyproject.toml): finished with status 'done'\nBuilding wheels for collected packages: data-detective\n  Building editable for data-detective (pyproject.toml): started\n  Building editable for data-detective (pyproject.toml): finished with status 'done'\n  Created wheel for data-detective: filename=data_detective-0.1.0-0.editable-py3-none-any.whl size=1765 sha256=30a735c1facfe565e17fa9e3a4a0177e6fa6bb9dffd56034e619ae3777b64a37\n  Stored in directory: C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Temp\\pip-ephem-wheel-cache-14c15eol\\wheels\\ec\\6d\\ba\\b16b6167d5272e47a7baa9879f608ab2043b673d7893825dcd\nSuccessfully built data-detective\nInstalling collected packages: data-detective\n  Attempting uninstall: data-detective\n    Found existing installation: data-detective 0.1.0\n    Uninstalling data-detective-0.1.0:\n      Successfully uninstalled data-detective-0.1.0\nSuccessfully installed data-detective-0.1.0",
+      "stderr": ""
+    },
+    "pip_check": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.62,
+      "stdout": "No broken requirements found.",
+      "stderr": ""
+    },
+    "ruff": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.12,
+      "stdout": "All checks passed!",
+      "stderr": ""
+    },
+    "pytest": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=.venv-clean/final-verification-junit.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.409,
+      "stdout": "........................................................................ [ 54%]\n.............................................................            [100%]\n============================== warnings summary ===============================\ntests/test_app.py::test_demo_repair_save_restore_and_recommendation\n  D:\\Project\\data-detective\\.venv-clean\\Lib\\site-packages\\dateutil\\tz\\tz.py:37: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).\n    EPOCH = datetime.datetime.utcfromtimestamp(0)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: D:\\Project\\data-detective\\.venv-clean\\final-verification-junit.xml -\n133 passed, 1 warning in 6.97s",
+      "stderr": ""
+    },
+    "case_evaluation": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "scripts/evaluate.py",
+        "--out",
+        "reports/final-case-verification"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.211,
+      "stdout": "{\n  \"dev\": {\n    \"cases\": 6,\n    \"injections\": {\n      \"date_corruption\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 4,\n        \"detected_rows\": 4,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 4\n      },\n      \"numeric_corruption\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 4,\n        \"detected_rows\": 4,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 4\n      },\n      \"copied_records\": {\n        \"events\": 2,\n        \"detected\": 2,\n        \"target_rows\": 6,\n        \"detected_rows\": 6,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 6\n      },\n      \"missing_value\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 4,\n        \"detected_rows\": 4,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 4\n      },\n      \"price_spike\": {\n        \"events\": 2,\n        \"detected\": 2,\n        \"target_rows\": 2,\n        \"detected_rows\": 2,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 2\n      }\n    },\n    \"controls\": {\n      \"price_reference\": {\n        \"rows\": 60,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_cancellation\": {\n        \"rows\": 6,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"multi_product_order\": {\n        \"rows\": 12,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_repeat\": {\n        \"rows\": 12,\n        \"error_rows\": 0,\n        \"review_rows\": 12,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_premium_price\": {\n        \"rows\": 6,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      }\n    },\n    \"oracle_restorations\": 6,\n    \"independent_metric_checks\": 18,\n    \"independent_metric_check_total\": 18\n  },\n  \"test\": {\n    \"cases\": 6,\n    \"injections\": {\n      \"date_corruption\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 4,\n        \"detected_rows\": 4,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 4\n      },\n      \"numeric_corruption\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 4,\n        \"detected_rows\": 4,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 4\n      },\n      \"copied_records\": {\n        \"events\": 2,\n        \"detected\": 2,\n        \"target_rows\": 6,\n        \"detected_rows\": 6,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 6\n      },\n      \"missing_value\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 4,\n        \"detected_rows\": 4,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 4\n      },\n      \"price_spike\": {\n        \"events\": 2,\n        \"detected\": 2,\n        \"target_rows\": 2,\n        \"detected_rows\": 2,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 2\n      }\n    },\n    \"controls\": {\n      \"price_reference\": {\n        \"rows\": 60,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_cancellation\": {\n        \"rows\": 6,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"multi_product_order\": {\n        \"rows\": 12,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_repeat\": {\n        \"rows\": 12,\n        \"error_rows\": 0,\n        \"review_rows\": 12,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_premium_price\": {\n        \"rows\": 6,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      }\n    },\n    \"oracle_restorations\": 6,\n    \"independent_metric_checks\": 18,\n    \"independent_metric_check_total\": 18\n  },\n  \"all\": {\n    \"cases\": 12,\n    \"injections\": {\n      \"date_corruption\": {\n        \"events\": 8,\n        \"detected\": 8,\n        \"target_rows\": 8,\n        \"detected_rows\": 8,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 8\n      },\n      \"numeric_corruption\": {\n        \"events\": 8,\n        \"detected\": 8,\n        \"target_rows\": 8,\n        \"detected_rows\": 8,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 8\n      },\n      \"copied_records\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 12,\n        \"detected_rows\": 12,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 12\n      },\n      \"missing_value\": {\n        \"events\": 8,\n        \"detected\": 8,\n        \"target_rows\": 8,\n        \"detected_rows\": 8,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 8\n      },\n      \"price_spike\": {\n        \"events\": 4,\n        \"detected\": 4,\n        \"target_rows\": 4,\n        \"detected_rows\": 4,\n        \"pre_existing_rows\": 0,\n        \"incremental_detected_rows\": 4\n      }\n    },\n    \"controls\": {\n      \"price_reference\": {\n        \"rows\": 120,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_cancellation\": {\n        \"rows\": 12,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"multi_product_order\": {\n        \"rows\": 24,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_repeat\": {\n        \"rows\": 24,\n        \"error_rows\": 0,\n        \"review_rows\": 24,\n        \"unexpected_review_rows\": 0\n      },\n      \"legitimate_premium_price\": {\n        \"rows\": 12,\n        \"error_rows\": 0,\n        \"review_rows\": 0,\n        \"unexpected_review_rows\": 0\n      }\n    },\n    \"oracle_restorations\": 12,\n    \"independent_metric_checks\": 36,\n    \"independent_metric_check_total\": 36\n  }\n}",
+      "stderr": ""
+    }
+  },
+  "pytest_counts": {
+    "tests": 133,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "locks": {
+    "requirements-windows.lock": {
+      "sha256": "05cd2aabc6fdb5ad003043e1b68534e7bb1f325cc982499785d62e4df759b422",
+      "package_count": 39,
+      "versions_match": true,
+      "mismatches": {}
+    },
+    "requirements-dev-windows.lock": {
+      "sha256": "309ad4f14af22ac07c8c63b08e5abf4abf4bc9815ab7758cb859c387b5c4ee86",
+      "package_count": 46,
+      "versions_match": true,
+      "mismatches": {}
+    }
+  },
+  "source_file_hashes": {
+    "pyproject.toml": "6f8314dcde43085ed647a48fe768b240c138a0612726e681d25b5d8c94e2c8f4",
+    "scripts/benchmark.py": "632edf0302b802d548961f0c89cbf75ea13951332bdda6799cb1dfe9a8852605",
+    "scripts/build_cases.py": "9a877d470c34841328dd61b65c96303339ddb4093afc89740241cb3199f5fbc1",
+    "scripts/build_walkthrough.py": "2dd667fc2973929ebc9ca0196b3b8c80aa04e19e8a2d8f36a8a971349562c883",
+    "scripts/evaluate.py": "c0b9490ae021abc0812148846d6b63570fa275e3aa1fa467a60b6f91bf2bd482",
+    "scripts/evaluate_advisor.py": "3e4d0baa13354df779641d939bea196928ec504006e0fb2b48c91d92736ba2bb",
+    "scripts/fetch_corpus.py": "4759a4efb0541c72d2e3ce6913f443c791ab28e9cf64fb4242195c3bf81ed91c",
+    "scripts/lock_dependencies.py": "6de0ed9d18258a321d376646c3b338ce9f22b47f7b5696e05e6c967c767cb7d7",
+    "src/data_detective/__init__.py": "2e29cb2dc0205fd364fe7fd05563f4f360e93af59a62d7243f65243958c11cab",
+    "src/data_detective/advisor.py": "5fad70fbc4b0e99eeafb24a799e673763cd9b97b5ee6c8ffd501a790793345a3",
+    "src/data_detective/cli.py": "ee6a7da166545a314acffbfd441cf7b0959db30a4172fbbc02fb074e04a97180",
+    "src/data_detective/engine.py": "80ed8fcf5519160479ea72cba2b610473132fe998d37d25c9ce35827d91222b8",
+    "src/data_detective/exports.py": "59811ad1e24ea19b8db5809eb92ede97ec6c4dd7bb870675cdbbb9a85020756a",
+    "src/data_detective/model_worker.py": "5f3cf2d84d6d041f0b29064d0f5a70d367f469a4b128c65f2704fc5198b88199",
+    "src/data_detective/models.py": "86791b548f6266d5c44b9edfdf6179fa931f98ece22329d1e8af9b37b1bca904",
+    "src/data_detective/store.py": "dcfc40f8d00534d467e9aba6294e3ee04e41e4e4b8a4961269c6cf574489e6ba",
+    "src/data_detective/ui.py": "ebaef0482eb047f5f653689d36fcc485de0da9ed2793681ee9bdf4ff945712d5",
+    "tests/test_advisor.py": "37ebaef6e1ef4f8b5e35940761e7f62f91fca65c273e9a641dccc718ab83fb38",
+    "tests/test_app.py": "cde66ad68663015dd5c6560fb35791ed59ed4f98ea92445052593193ab618743",
+    "tests/test_cases.py": "9c0bbc016ddba21f3eec89bd555dd71ecb64c74ac319bd42171c0d709d20168d",
+    "tests/test_engine.py": "1569cc0c9ee917afb697a5c451a04db2a0a90e191a17c5b0dbb880fe2ac2d8d7",
+    "tests/test_regressions.py": "042ebd022d596ff11272acc104119f50a14e8e9ee46de89890ab2f67d0c46721",
+    "tests/test_store.py": "77335d29af3c54f4c1faf9231e42a7095062fbcdbb9bc8c84a1b1cddfbdb8475"
+  },
+  "source_changes_during_run": {},
+  "case_evaluation": {
+    "path": "reports/final-case-verification/evaluation.json",
+    "sha256": "b44c2f98a3f60d21ab751f0087b16339b26d8147b2866badd9b8e85acece0f92",
+    "summary": {
+      "dev": {
+        "cases": 6,
+        "injections": {
+          "date_corruption": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 4,
+            "detected_rows": 4,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 4
+          },
+          "numeric_corruption": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 4,
+            "detected_rows": 4,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 4
+          },
+          "copied_records": {
+            "events": 2,
+            "detected": 2,
+            "target_rows": 6,
+            "detected_rows": 6,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 6
+          },
+          "missing_value": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 4,
+            "detected_rows": 4,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 4
+          },
+          "price_spike": {
+            "events": 2,
+            "detected": 2,
+            "target_rows": 2,
+            "detected_rows": 2,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 2
+          }
+        },
+        "controls": {
+          "price_reference": {
+            "rows": 60,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_cancellation": {
+            "rows": 6,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "multi_product_order": {
+            "rows": 12,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_repeat": {
+            "rows": 12,
+            "error_rows": 0,
+            "review_rows": 12,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_premium_price": {
+            "rows": 6,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          }
+        },
+        "oracle_restorations": 6,
+        "independent_metric_checks": 18,
+        "independent_metric_check_total": 18
+      },
+      "test": {
+        "cases": 6,
+        "injections": {
+          "date_corruption": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 4,
+            "detected_rows": 4,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 4
+          },
+          "numeric_corruption": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 4,
+            "detected_rows": 4,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 4
+          },
+          "copied_records": {
+            "events": 2,
+            "detected": 2,
+            "target_rows": 6,
+            "detected_rows": 6,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 6
+          },
+          "missing_value": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 4,
+            "detected_rows": 4,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 4
+          },
+          "price_spike": {
+            "events": 2,
+            "detected": 2,
+            "target_rows": 2,
+            "detected_rows": 2,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 2
+          }
+        },
+        "controls": {
+          "price_reference": {
+            "rows": 60,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_cancellation": {
+            "rows": 6,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "multi_product_order": {
+            "rows": 12,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_repeat": {
+            "rows": 12,
+            "error_rows": 0,
+            "review_rows": 12,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_premium_price": {
+            "rows": 6,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          }
+        },
+        "oracle_restorations": 6,
+        "independent_metric_checks": 18,
+        "independent_metric_check_total": 18
+      },
+      "all": {
+        "cases": 12,
+        "injections": {
+          "date_corruption": {
+            "events": 8,
+            "detected": 8,
+            "target_rows": 8,
+            "detected_rows": 8,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 8
+          },
+          "numeric_corruption": {
+            "events": 8,
+            "detected": 8,
+            "target_rows": 8,
+            "detected_rows": 8,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 8
+          },
+          "copied_records": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 12,
+            "detected_rows": 12,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 12
+          },
+          "missing_value": {
+            "events": 8,
+            "detected": 8,
+            "target_rows": 8,
+            "detected_rows": 8,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 8
+          },
+          "price_spike": {
+            "events": 4,
+            "detected": 4,
+            "target_rows": 4,
+            "detected_rows": 4,
+            "pre_existing_rows": 0,
+            "incremental_detected_rows": 4
+          }
+        },
+        "controls": {
+          "price_reference": {
+            "rows": 120,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_cancellation": {
+            "rows": 12,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "multi_product_order": {
+            "rows": 24,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_repeat": {
+            "rows": 24,
+            "error_rows": 0,
+            "review_rows": 24,
+            "unexpected_review_rows": 0
+          },
+          "legitimate_premium_price": {
+            "rows": 12,
+            "error_rows": 0,
+            "review_rows": 0,
+            "unexpected_review_rows": 0
+          }
+        },
+        "oracle_restorations": 12,
+        "independent_metric_checks": 36,
+        "independent_metric_check_total": 36
+      }
+    }
+  },
+  "installed_packages": {
+    "altair": "6.3.0",
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "certifi": "2023.11.17",
+    "charset-normalizer": "3.3.2",
+    "click": "8.5.0",
+    "colorama": "0.4.6",
+    "data-detective": "0.1.0",
+    "et-xmlfile": "2.0.0",
+    "h11": "0.16.0",
+    "httptools": "0.8.0",
+    "idna": "3.6",
+    "iniconfig": "2.0.0",
+    "itsdangerous": "2.2.0",
+    "jinja2": "3.1.2",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "markupsafe": "2.1.3",
+    "narwhals": "2.26.0",
+    "numpy": "1.26.2",
+    "openpyxl": "3.1.5",
+    "packaging": "24.0",
+    "pandas": "2.3.3",
+    "pillow": "11.1.0",
+    "pip": "23.2.1",
+    "plotly": "6.9.0",
+    "pluggy": "1.5.0",
+    "protobuf": "7.36.2",
+    "pyarrow": "25.0.1",
+    "pydeck": "0.9.3",
+    "pytest": "8.3.4",
+    "python-dateutil": "2.8.2",
+    "python-multipart": "0.0.32",
+    "pytz": "2023.3.post1",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rpds-py": "2026.6.3",
+    "ruff": "0.16.8",
+    "six": "1.16.0",
+    "starlette": "1.6.0",
+    "streamlit": "1.64.0",
+    "toml": "0.10.2",
+    "typing-extensions": "4.16.0",
+    "tzdata": "2023.3",
+    "urllib3": "2.1.0",
+    "uvicorn": "0.53.0",
+    "watchdog": "6.0.0",
+    "websockets": "16.1.1"
+  },
+  "model_packages_present": [],
+  "limits": [
+    "Windows x64 / CPython 3.12 only.",
+    "Locks pin runtime/developer versions, not wheel hashes or isolated build tools.",
+    "No real model inference or performance benchmark was rerun. The case evaluation checks frozen injections and repair invariants."
+  ],
+  "lock_generation_retry": {
+    "initial_attempt": {
+      "command": [
+        ".venv\\Scripts\\python.exe",
+        "scripts/lock_dependencies.py"
+      ],
+      "exit_code": 1,
+      "elapsed_seconds": 0.276,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\importlib\\metadata\\__init__.py\", line 397, in from_name\n    return next(cls.discover(name=name))\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nStopIteration\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"D:\\Project\\data-detective\\scripts\\lock_dependencies.py\", line 43, in closure\n    distribution = metadata.distribution(name)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\importlib\\metadata\\__init__.py\", line 861, in distribution\n    return Distribution.from_name(distribution_name)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\importlib\\metadata\\__init__.py\", line 399, in from_name\n    raise PackageNotFoundError(name)\nimportlib.metadata.PackageNotFoundError: No package metadata was found for pillow\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"D:\\Project\\data-detective\\scripts\\lock_dependencies.py\", line 119, in <module>\n    main()\n  File \"D:\\Project\\data-detective\\scripts\\lock_dependencies.py\", line 107, in main\n    runtime_packages = closure(runtime)\n                       ^^^^^^^^^^^^^^^^\n  File \"D:\\Project\\data-detective\\scripts\\lock_dependencies.py\", line 45, in closure\n    raise RuntimeError(f\"Required distribution is not installed in the source environment: {name}\") from exc\nRuntimeError: Required distribution is not installed in the source environment: pillow"
+    },
+    "cause": "The verification wrapper incorrectly applied PYTHONNOUSERSITE=1 to the source environment too, hiding its existing Pillow metadata.",
+    "correction": "Only the source metadata-generation subprocess was restored to its existing site-package visibility; no package was installed or changed in .venv. All tests and checks still use isolated .venv-clean with PYTHONNOUSERSITE=1."
+  }
+}

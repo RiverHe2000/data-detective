@@ -1,0 +1,874 @@
+{
+  "generated_at": "2026-09-20T23:58:47.532944+00:00",
+  "prompt_version": "investigation-ranking-v4",
+  "evaluation_kind": "diagnostic smoke subset",
+  "model_input_policy": "Bounded rule summaries without raw amounts, dates or counts; short aliases map to actual finding IDs",
+  "question_set_sha256": "5bb5a3dbbefc878d2ed76218a036eb291c32d6fa200cb64b9a535ab22c5a7e70",
+  "label_method": "Predefined rule-relevance rubric frozen before inference; no human interpretation-accuracy claim",
+  "limitations": [
+    "Small public/synthetic development and held-out corpus; not a production accuracy estimate",
+    "Prompt and request handling have engineering corrections informed by earlier failures; these are reused questions, not a fresh untouched holdout",
+    "Protocol validation does not prove explanation correctness; no human semantic ratings collected",
+    "Cold-process latency includes Python startup, model loading, generation and validation",
+    "Failed model calls use rules in the product, but are not scored as successful model answers"
+  ],
+  "model_requested": true,
+  "model_path": "D:/models/Qwen3-4B-Instruct-2507",
+  "environment": {
+    "model_interpreter": "D:/Project/.venv/Scripts/python.exe",
+    "packages": {
+      "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+      "torch": "2.11.0+cu128",
+      "transformers": "5.16.1"
+    },
+    "platform": "Windows-11-10.0.26200-SP0"
+  },
+  "corpus_sha256": {
+    "dev-broken-dates": "fad04d5b4469f9e00ca7459e63bd8199ac14eef4dd62ad1ee4c3bfb9a728cb55",
+    "dev-broken-numbers": "f73516fd96160ac8de3f0d5d575dc47a62865b3ff9ca3069c584a46c024a10d5",
+    "dev-duplicate-dispatch": "996cd1e2fec58b58407b344eac0afb7b04c12cee0564cffdb207f1db8bd71f7b",
+    "dev-missing-fields": "2e510e8f7e876624cb56bf41e2bdbec776bb593793b04963cce3964a93e9d0ef",
+    "dev-mixed-incident": "9d54d6b3f24c5e4a1d259a281d1fb75d949762e587d31da46310fafd3c028052",
+    "dev-price-spike": "84de45c391480702d30dc12f6fc92b46a1704ee807031c9bea307c4ce4e513ba",
+    "test-broken-dates": "ec7e56fe5ad9ae4bd9f8e6183a07eee9e6b309c5a53100cd25f01249a76a8310",
+    "test-broken-numbers": "4116465731101f124527e76dce1aca8e9378aac1dce72786b6734948c90e2b16",
+    "test-duplicate-dispatch": "a90a9ff67aff6110a840dc9d8c2210c5f21eaef5a1451dcd45ff18a4f3222067",
+    "test-missing-fields": "d05c2fff7d9cc42ed1ace21735661b400986161de8f467688ee93b30011e9a74",
+    "test-mixed-incident": "c3f80e286b04d5026c09dfc44db67f252dc7b0296bcee1d749edea4d4c102bc7",
+    "test-price-spike": "2e3c948a35a5cde92e7098ee5552e906406c421ab16b474f63c278d236740d9d"
+  },
+  "questions": [
+    {
+      "question_id": "dev-month",
+      "split": "dev",
+      "question": "Monthly sales coverage looks incomplete. What should I inspect?",
+      "relevant_rule_ids_in_priority_order": [
+        "date_parse"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates need format review",
+          "column": "InvoiceDate",
+          "explanation": "Transactions with readable amounts and unreadable dates remain outside the monthly distribution."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates need format review",
+          "column": "InvoiceDate",
+          "explanation": "Transactions with readable amounts and unreadable dates remain outside the monthly distribution."
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "UnitPrice",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "Quantity",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "UnitPrice",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "Quantity",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "UnitPrice",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "InvoiceNo",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "UnitPrice",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "InvoiceNo",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6402235f6750cb7c2ba6b304",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_f735c489014c522a584b5668",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual product prices need review",
+          "column": "UnitPrice",
+          "explanation": "Unusual prices may be legitimate. Verify product context before proposing any change."
+        }
+      ],
+      "model_candidate_aliases": {
+        "F_A": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+        "F_B": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+        "F_C": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+        "F_D": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+        "F_E": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+        "F_F": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+        "F_G": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+        "F_H": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+        "F_I": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+        "F_J": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+        "F_K": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+        "F_L": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+        "F_M": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+        "F_N": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+        "F_O": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+        "F_P": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+        "F_Q": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+        "F_R": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+        "F_S": "dev-mixed-incident::f_6402235f6750cb7c2ba6b304",
+        "F_T": "dev-mixed-incident::f_f735c489014c522a584b5668"
+      },
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+            "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 0.0002817999920807779,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "date_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+            "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0"
+          ],
+          "explanation": "Incomplete monthly sales may stem from unreadable dates or missing required fields like UnitPrice and InvoiceNo.",
+          "next_steps": [
+            "Verify InvoiceDate format consistency in the source data.",
+            "Check for missing UnitPrice and InvoiceNo values against original source records."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 12.0586679999833,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"F_A\", \"F_B\", \"F_G\"], \"explanation\": \"Incomplete monthly sales may stem from unreadable dates or missing required fields like UnitPrice and InvoiceNo.\", \"next_steps\": [\"Verify InvoiceDate format consistency in the source data.\", \"Check for missing UnitPrice and InvoiceNo values against original source records.\"]}"
+        },
+        "score": {
+          "top_rule": "date_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "cached_repeat": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+            "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0"
+          ],
+          "explanation": "Incomplete monthly sales may stem from unreadable dates or missing required fields like UnitPrice and InvoiceNo.",
+          "next_steps": [
+            "Verify InvoiceDate format consistency in the source data.",
+            "Check for missing UnitPrice and InvoiceNo values against original source records."
+          ],
+          "mode": "qwen_cached",
+          "elapsed_seconds": 0.0007054000161588192,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"F_A\", \"F_B\", \"F_G\"], \"explanation\": \"Incomplete monthly sales may stem from unreadable dates or missing required fields like UnitPrice and InvoiceNo.\", \"next_steps\": [\"Verify InvoiceDate format consistency in the source data.\", \"Check for missing UnitPrice and InvoiceNo values against original source records.\"]}"
+        },
+        "cache_hit": true,
+        "same_advice": true
+      }
+    },
+    {
+      "question_id": "dev-numbers",
+      "split": "dev",
+      "question": "Some quantity or price values cannot be parsed. What should I inspect?",
+      "relevant_rule_ids_in_priority_order": [
+        "numeric_parse"
+      ],
+      "corpus_finding_count": 27,
+      "model_candidates": [
+        {
+          "finding_id": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "UnitPrice",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "Quantity",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "UnitPrice",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "Quantity",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates need format review",
+          "column": "InvoiceDate",
+          "explanation": "Transactions with readable amounts and unreadable dates remain outside the monthly distribution."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates need format review",
+          "column": "InvoiceDate",
+          "explanation": "Transactions with readable amounts and unreadable dates remain outside the monthly distribution."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_f735c489014c522a584b5668",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual product prices need review",
+          "column": "UnitPrice",
+          "explanation": "Unusual prices may be legitimate. Verify product context before proposing any change."
+        },
+        {
+          "finding_id": "dev-price-spike::f_94c748225e05f6d09a323ad5",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual product prices need review",
+          "column": "UnitPrice",
+          "explanation": "Unusual prices may be legitimate. Verify product context before proposing any change."
+        },
+        {
+          "finding_id": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "UnitPrice",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "InvoiceNo",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "UnitPrice",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "InvoiceNo",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "dev-mixed-incident::f_30215e5c4c2a497d26c10521",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        }
+      ],
+      "model_candidate_aliases": {
+        "F_A": "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+        "F_B": "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+        "F_C": "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+        "F_D": "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+        "F_E": "dev-broken-dates::f_fe891ef0c6dbc7539be720c5",
+        "F_F": "dev-mixed-incident::f_d6dd8e8553f2184a464b574c",
+        "F_G": "dev-mixed-incident::f_f735c489014c522a584b5668",
+        "F_H": "dev-price-spike::f_94c748225e05f6d09a323ad5",
+        "F_I": "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+        "F_J": "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164",
+        "F_K": "dev-mixed-incident::f_6930a93af8434cc2ca8bad1e",
+        "F_L": "dev-mixed-incident::f_6a13bd9cdc71a1ec12d4bf51",
+        "F_M": "dev-broken-dates::f_5196e528eaf366668cab72e5",
+        "F_N": "dev-broken-numbers::f_05b51375c3d7e0e6f858d9cc",
+        "F_O": "dev-duplicate-dispatch::f_82ecb3c78b0aa7358b600289",
+        "F_P": "dev-duplicate-dispatch::f_89ae54b29be9949c84c2bf06",
+        "F_Q": "dev-duplicate-dispatch::f_adda50ace8902094c665d45c",
+        "F_R": "dev-duplicate-dispatch::f_f3c929f5baf9c23a6c92b1be",
+        "F_S": "dev-missing-fields::f_1e95ddf4e92b193e09498325",
+        "F_T": "dev-mixed-incident::f_30215e5c4c2a497d26c10521"
+      },
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-mixed-incident::f_14f9cdea59fa06bf53d1600c",
+            "dev-mixed-incident::f_b28782dea908f1c6768d1ba2",
+            "dev-broken-dates::f_fe891ef0c6dbc7539be720c5"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 3.0199997127056122e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+            "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164"
+          ],
+          "explanation": "Parsing errors in numeric fields like UnitPrice and Quantity may stem from invalid formats or missing values.",
+          "next_steps": [
+            "Verify the format of UnitPrice and Quantity values in the source data.",
+            "Check for blank or missing required fields in InvoiceNo and UnitPrice against the original source."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 12.356814300001133,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"F_A\", \"F_B\", \"F_I\", \"F_J\"], \"explanation\": \"Parsing errors in numeric fields like UnitPrice and Quantity may stem from invalid formats or missing values.\", \"next_steps\": [\"Verify the format of UnitPrice and Quantity values in the source data.\", \"Check for blank or missing required fields in InvoiceNo and UnitPrice against the original source.\"]}"
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "cached_repeat": {
+        "result": {
+          "finding_ids": [
+            "dev-broken-numbers::f_7b2e34711d1c49342c9c7607",
+            "dev-broken-numbers::f_ff65f412fdd271078f570a0e",
+            "dev-missing-fields::f_6591cf140372e91cf034a7c0",
+            "dev-missing-fields::f_e9fcd1ec1ace8dfb0f3f0164"
+          ],
+          "explanation": "Parsing errors in numeric fields like UnitPrice and Quantity may stem from invalid formats or missing values.",
+          "next_steps": [
+            "Verify the format of UnitPrice and Quantity values in the source data.",
+            "Check for blank or missing required fields in InvoiceNo and UnitPrice against the original source."
+          ],
+          "mode": "qwen_cached",
+          "elapsed_seconds": 0.0006733000045642257,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"F_A\", \"F_B\", \"F_I\", \"F_J\"], \"explanation\": \"Parsing errors in numeric fields like UnitPrice and Quantity may stem from invalid formats or missing values.\", \"next_steps\": [\"Verify the format of UnitPrice and Quantity values in the source data.\", \"Check for blank or missing required fields in InvoiceNo and UnitPrice against the original source.\"]}"
+        },
+        "cache_hit": true,
+        "same_advice": true
+      }
+    },
+    {
+      "question_id": "test-duplicates",
+      "split": "test",
+      "question": "A file may have been pasted into itself. Which suspect rows should I inspect?",
+      "relevant_rule_ids_in_priority_order": [
+        "duplicate_rows"
+      ],
+      "corpus_finding_count": 31,
+      "model_candidates": [
+        {
+          "finding_id": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "Quantity",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "UnitPrice",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "test-mixed-incident::f_0d0f18552583844b24484f76",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "UnitPrice",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+          "rule_id": "numeric_parse",
+          "severity": "error",
+          "title": "Numeric values need format review",
+          "column": "Quantity",
+          "explanation": "Unreadable quantities or unit prices affect which transactions enter the net amount."
+        },
+        {
+          "finding_id": "test-missing-fields::f_57431c44fb54e698fd38387e",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "InvoiceNo",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "test-missing-fields::f_a8452081a027d971b3cad795",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "UnitPrice",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "InvoiceNo",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+          "rule_id": "missing_required",
+          "severity": "error",
+          "title": "Required fields contain blank values",
+          "column": "UnitPrice",
+          "explanation": "Missing fields need verification against the original source and the confirmed field mapping."
+        },
+        {
+          "finding_id": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates need format review",
+          "column": "InvoiceDate",
+          "explanation": "Transactions with readable amounts and unreadable dates remain outside the monthly distribution."
+        },
+        {
+          "finding_id": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+          "rule_id": "date_parse",
+          "severity": "error",
+          "title": "Dates need format review",
+          "column": "InvoiceDate",
+          "explanation": "Transactions with readable amounts and unreadable dates remain outside the monthly distribution."
+        },
+        {
+          "finding_id": "test-broken-dates::f_623237f28bea9c06ad329859",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-broken-dates::f_a0168081c9cbd506a096681f",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-broken-numbers::f_070185af37849eb27a5861c7",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-duplicate-dispatch::f_af6308a4ffd7e03f516ffd3d",
+          "rule_id": "duplicate_rows",
+          "severity": "review",
+          "title": "Matching source records need review",
+          "column": "",
+          "explanation": "Matching rows may still be legitimate. Verify the business records before proposing exclusion."
+        },
+        {
+          "finding_id": "test-mixed-incident::f_672e5fc98e338fb7e0bb6156",
+          "rule_id": "price_outlier",
+          "severity": "review",
+          "title": "Unusual product prices need review",
+          "column": "UnitPrice",
+          "explanation": "Unusual prices may be legitimate. Verify product context before proposing any change."
+        }
+      ],
+      "model_candidate_aliases": {
+        "F_A": "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+        "F_B": "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+        "F_C": "test-mixed-incident::f_0d0f18552583844b24484f76",
+        "F_D": "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+        "F_E": "test-missing-fields::f_57431c44fb54e698fd38387e",
+        "F_F": "test-missing-fields::f_a8452081a027d971b3cad795",
+        "F_G": "test-mixed-incident::f_36bad9d7dbeef0f2cb6e4005",
+        "F_H": "test-mixed-incident::f_d31d7b32da9b291e32c36994",
+        "F_I": "test-broken-dates::f_abe7e2cf30987f368a3f68a2",
+        "F_J": "test-mixed-incident::f_95a7af50bdfdb2f093f72c7b",
+        "F_K": "test-broken-dates::f_623237f28bea9c06ad329859",
+        "F_L": "test-broken-dates::f_a0168081c9cbd506a096681f",
+        "F_M": "test-broken-numbers::f_070185af37849eb27a5861c7",
+        "F_N": "test-broken-numbers::f_c4c4a227c497cbbcfdbc72af",
+        "F_O": "test-broken-numbers::f_e1785052275664f2a5c83dc0",
+        "F_P": "test-duplicate-dispatch::f_1169a713bd0b90c46213f25b",
+        "F_Q": "test-duplicate-dispatch::f_12f78df72de4791630d1e3f4",
+        "F_R": "test-duplicate-dispatch::f_6f23c288ac428ed55275931a",
+        "F_S": "test-duplicate-dispatch::f_af6308a4ffd7e03f516ffd3d",
+        "F_T": "test-mixed-incident::f_672e5fc98e338fb7e0bb6156"
+      },
+      "rubric_rules_available_to_model": true,
+      "rules": {
+        "result": {
+          "finding_ids": [
+            "test-broken-numbers::f_a9b4e7f87676e92d3e7c3fd4",
+            "test-broken-numbers::f_fcc95c77102a6179cf114a1c",
+            "test-mixed-incident::f_0d0f18552583844b24484f76",
+            "test-mixed-incident::f_facbdc8f6ba32be59aec83f1",
+            "test-missing-fields::f_57431c44fb54e698fd38387e"
+          ],
+          "explanation": "These leads are ranked by question keywords and a fixed rule priority. Each needs evidence review.",
+          "next_steps": [
+            "Inspect the linked source rows and confirm the business meaning.",
+            "Preview a specific repair and compare coverage and monthly distribution before confirming."
+          ],
+          "mode": "rules",
+          "elapsed_seconds": 2.5999994250014424e-05,
+          "fallback_reason": null,
+          "raw_response": null
+        },
+        "score": {
+          "top_rule": "numeric_parse",
+          "top_priority_hit": false,
+          "relevant_rule_recall_at_three": 0.0
+        }
+      },
+      "qwen": {
+        "accepted": true,
+        "result": {
+          "finding_ids": [
+            "test-broken-dates::f_623237f28bea9c06ad329859",
+            "test-broken-dates::f_a0168081c9cbd506a096681f",
+            "test-broken-numbers::f_070185af37849eb27a5861c7"
+          ],
+          "explanation": "Duplicate rows could result from pasting a file into itself.",
+          "next_steps": [
+            "Verify row duplicates by checking InvoiceNo and InvoiceDate combinations.",
+            "Review business context to confirm if duplicates represent legitimate entries."
+          ],
+          "mode": "qwen",
+          "elapsed_seconds": 11.584126700006891,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"F_K\", \"F_L\", \"F_M\"], \"explanation\": \"Duplicate rows could result from pasting a file into itself.\", \"next_steps\": [\"Verify row duplicates by checking InvoiceNo and InvoiceDate combinations.\", \"Review business context to confirm if duplicates represent legitimate entries.\"]}"
+        },
+        "score": {
+          "top_rule": "duplicate_rows",
+          "top_priority_hit": true,
+          "relevant_rule_recall_at_three": 1.0
+        }
+      },
+      "cached_repeat": {
+        "result": {
+          "finding_ids": [
+            "test-broken-dates::f_623237f28bea9c06ad329859",
+            "test-broken-dates::f_a0168081c9cbd506a096681f",
+            "test-broken-numbers::f_070185af37849eb27a5861c7"
+          ],
+          "explanation": "Duplicate rows could result from pasting a file into itself.",
+          "next_steps": [
+            "Verify row duplicates by checking InvoiceNo and InvoiceDate combinations.",
+            "Review business context to confirm if duplicates represent legitimate entries."
+          ],
+          "mode": "qwen_cached",
+          "elapsed_seconds": 0.0006070999952498823,
+          "fallback_reason": null,
+          "raw_response": "{\"finding_ids\": [\"F_K\", \"F_L\", \"F_M\"], \"explanation\": \"Duplicate rows could result from pasting a file into itself.\", \"next_steps\": [\"Verify row duplicates by checking InvoiceNo and InvoiceDate combinations.\", \"Review business context to confirm if duplicates represent legitimate entries.\"]}"
+        },
+        "cache_hit": true,
+        "same_advice": true
+      }
+    }
+  ],
+  "model_config_sha256": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+  "summary": {
+    "rules": {
+      "scored_queries": 3,
+      "top_priority_accuracy": 0.6666666666666666,
+      "mean_relevant_rule_recall_at_three": 0.6666666666666666,
+      "mean_elapsed_seconds": 0.00011266666115261614
+    },
+    "qwen_accepted_only": {
+      "scored_queries": 3,
+      "top_priority_accuracy": 1,
+      "mean_relevant_rule_recall_at_three": 1.0,
+      "mean_elapsed_seconds": 11.999869666663775
+    },
+    "attempted_model_calls": 3,
+    "fallback_count": 0,
+    "protocol_acceptance_rate": 1.0,
+    "product_with_fallback": {
+      "scored_queries": 3,
+      "top_priority_accuracy": 1,
+      "mean_relevant_rule_recall_at_three": 1.0,
+      "mean_elapsed_seconds": 11.999869666663775
+    },
+    "failure_categories": {
+      "schema": 0,
+      "citation": 0,
+      "numeric_claim": 0,
+      "unsupported_assertion": 0,
+      "timeout": 0,
+      "worker_failure": 0,
+      "unavailable": 0
+    },
+    "cold_call_median_seconds": 12.0586679999833,
+    "cold_call_max_seconds": 12.356814300001133,
+    "cached_repeats": {
+      "count": 3,
+      "all_cache_hits": true,
+      "all_advice_equal": true,
+      "median_seconds": 0.0006733000045642257
+    }
+  }
+}

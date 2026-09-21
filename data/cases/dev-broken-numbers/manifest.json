@@ -1,0 +1,985 @@
+{
+  "schema_version": 1,
+  "builder_version": "1.0.0",
+  "case_id": "dev-broken-numbers",
+  "split": "dev",
+  "title": "Broken Numbers",
+  "showcase": false,
+  "truth_statement": "Baseline is an unclean real-data reference, not ground truth. Only deliberate edits and explicitly synthetic controls have known labels.",
+  "columns": [
+    "InvoiceNo",
+    "StockCode",
+    "Description",
+    "Quantity",
+    "InvoiceDate",
+    "UnitPrice",
+    "CustomerID",
+    "Country"
+  ],
+  "mapping": {
+    "order_id": "InvoiceNo",
+    "product_id": "StockCode",
+    "quantity": "Quantity",
+    "unit_price": "UnitPrice",
+    "order_time": "InvoiceDate"
+  },
+  "settings": {
+    "date_format": "%Y-%m-%d %H:%M:%S",
+    "currency": "GBP",
+    "decimal_separator": ".",
+    "thousands_separator": ""
+  },
+  "source": {
+    "source_url": "https://archive.ics.uci.edu/static/public/352/online+retail.zip",
+    "source_page": "https://archive.ics.uci.edu/dataset/352/online+retail",
+    "attribution": "Chen, D. (2015). Online Retail [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C5BW33.",
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "archive_sha256": "f5385cbb54bbebf7196389109c6b0621faab0c304e3702548165e71c84aede8b",
+    "workbook_sha256": "43465a06f2ccf7c8b5bd2892bc7defb52f97487934fe93b16ae4c3936424676d"
+  },
+  "source_window": {
+    "first_data_row": 80001,
+    "last_data_row": 80120,
+    "count": 120,
+    "numbering": "1-based data rows; Excel worksheet row = data row + 1"
+  },
+  "transformations": [
+    "InvoiceDate serialized to ISO 8601 without timezone",
+    "Excel blanks represented as empty CSV fields",
+    "16 explicitly synthetic controls appended before injection"
+  ],
+  "baseline_sha256": "38f686ff32828cb2e94a8a878e8620923167c017b6f233a852312d3000ae635a",
+  "input_sha256": "f73516fd96160ac8de3f0d5d575dc47a62865b3ff9ca3069c584a46c024a10d5",
+  "baseline_rows": 136,
+  "input_rows": 136,
+  "row_provenance": [
+    {
+      "input_row_index": 1,
+      "origin": "uci",
+      "source_data_row": 80001,
+      "source_excel_row": 80002
+    },
+    {
+      "input_row_index": 2,
+      "origin": "uci",
+      "source_data_row": 80002,
+      "source_excel_row": 80003
+    },
+    {
+      "input_row_index": 3,
+      "origin": "uci",
+      "source_data_row": 80003,
+      "source_excel_row": 80004
+    },
+    {
+      "input_row_index": 4,
+      "origin": "uci",
+      "source_data_row": 80004,
+      "source_excel_row": 80005
+    },
+    {
+      "input_row_index": 5,
+      "origin": "uci",
+      "source_data_row": 80005,
+      "source_excel_row": 80006
+    },
+    {
+      "input_row_index": 6,
+      "origin": "uci",
+      "source_data_row": 80006,
+      "source_excel_row": 80007
+    },
+    {
+      "input_row_index": 7,
+      "origin": "uci",
+      "source_data_row": 80007,
+      "source_excel_row": 80008
+    },
+    {
+      "input_row_index": 8,
+      "origin": "uci",
+      "source_data_row": 80008,
+      "source_excel_row": 80009
+    },
+    {
+      "input_row_index": 9,
+      "origin": "uci",
+      "source_data_row": 80009,
+      "source_excel_row": 80010
+    },
+    {
+      "input_row_index": 10,
+      "origin": "uci",
+      "source_data_row": 80010,
+      "source_excel_row": 80011
+    },
+    {
+      "input_row_index": 11,
+      "origin": "uci",
+      "source_data_row": 80011,
+      "source_excel_row": 80012
+    },
+    {
+      "input_row_index": 12,
+      "origin": "uci",
+      "source_data_row": 80012,
+      "source_excel_row": 80013
+    },
+    {
+      "input_row_index": 13,
+      "origin": "uci",
+      "source_data_row": 80013,
+      "source_excel_row": 80014
+    },
+    {
+      "input_row_index": 14,
+      "origin": "uci",
+      "source_data_row": 80014,
+      "source_excel_row": 80015
+    },
+    {
+      "input_row_index": 15,
+      "origin": "uci",
+      "source_data_row": 80015,
+      "source_excel_row": 80016
+    },
+    {
+      "input_row_index": 16,
+      "origin": "uci",
+      "source_data_row": 80016,
+      "source_excel_row": 80017
+    },
+    {
+      "input_row_index": 17,
+      "origin": "uci",
+      "source_data_row": 80017,
+      "source_excel_row": 80018
+    },
+    {
+      "input_row_index": 18,
+      "origin": "uci",
+      "source_data_row": 80018,
+      "source_excel_row": 80019
+    },
+    {
+      "input_row_index": 19,
+      "origin": "uci",
+      "source_data_row": 80019,
+      "source_excel_row": 80020
+    },
+    {
+      "input_row_index": 20,
+      "origin": "uci",
+      "source_data_row": 80020,
+      "source_excel_row": 80021
+    },
+    {
+      "input_row_index": 21,
+      "origin": "uci",
+      "source_data_row": 80021,
+      "source_excel_row": 80022
+    },
+    {
+      "input_row_index": 22,
+      "origin": "uci",
+      "source_data_row": 80022,
+      "source_excel_row": 80023
+    },
+    {
+      "input_row_index": 23,
+      "origin": "uci",
+      "source_data_row": 80023,
+      "source_excel_row": 80024
+    },
+    {
+      "input_row_index": 24,
+      "origin": "uci",
+      "source_data_row": 80024,
+      "source_excel_row": 80025
+    },
+    {
+      "input_row_index": 25,
+      "origin": "uci",
+      "source_data_row": 80025,
+      "source_excel_row": 80026
+    },
+    {
+      "input_row_index": 26,
+      "origin": "uci",
+      "source_data_row": 80026,
+      "source_excel_row": 80027
+    },
+    {
+      "input_row_index": 27,
+      "origin": "uci",
+      "source_data_row": 80027,
+      "source_excel_row": 80028
+    },
+    {
+      "input_row_index": 28,
+      "origin": "uci",
+      "source_data_row": 80028,
+      "source_excel_row": 80029
+    },
+    {
+      "input_row_index": 29,
+      "origin": "uci",
+      "source_data_row": 80029,
+      "source_excel_row": 80030
+    },
+    {
+      "input_row_index": 30,
+      "origin": "uci",
+      "source_data_row": 80030,
+      "source_excel_row": 80031
+    },
+    {
+      "input_row_index": 31,
+      "origin": "uci",
+      "source_data_row": 80031,
+      "source_excel_row": 80032
+    },
+    {
+      "input_row_index": 32,
+      "origin": "uci",
+      "source_data_row": 80032,
+      "source_excel_row": 80033
+    },
+    {
+      "input_row_index": 33,
+      "origin": "uci",
+      "source_data_row": 80033,
+      "source_excel_row": 80034
+    },
+    {
+      "input_row_index": 34,
+      "origin": "uci",
+      "source_data_row": 80034,
+      "source_excel_row": 80035
+    },
+    {
+      "input_row_index": 35,
+      "origin": "uci",
+      "source_data_row": 80035,
+      "source_excel_row": 80036
+    },
+    {
+      "input_row_index": 36,
+      "origin": "uci",
+      "source_data_row": 80036,
+      "source_excel_row": 80037
+    },
+    {
+      "input_row_index": 37,
+      "origin": "uci",
+      "source_data_row": 80037,
+      "source_excel_row": 80038
+    },
+    {
+      "input_row_index": 38,
+      "origin": "uci",
+      "source_data_row": 80038,
+      "source_excel_row": 80039
+    },
+    {
+      "input_row_index": 39,
+      "origin": "uci",
+      "source_data_row": 80039,
+      "source_excel_row": 80040
+    },
+    {
+      "input_row_index": 40,
+      "origin": "uci",
+      "source_data_row": 80040,
+      "source_excel_row": 80041
+    },
+    {
+      "input_row_index": 41,
+      "origin": "uci",
+      "source_data_row": 80041,
+      "source_excel_row": 80042
+    },
+    {
+      "input_row_index": 42,
+      "origin": "uci",
+      "source_data_row": 80042,
+      "source_excel_row": 80043
+    },
+    {
+      "input_row_index": 43,
+      "origin": "uci",
+      "source_data_row": 80043,
+      "source_excel_row": 80044
+    },
+    {
+      "input_row_index": 44,
+      "origin": "uci",
+      "source_data_row": 80044,
+      "source_excel_row": 80045
+    },
+    {
+      "input_row_index": 45,
+      "origin": "uci",
+      "source_data_row": 80045,
+      "source_excel_row": 80046
+    },
+    {
+      "input_row_index": 46,
+      "origin": "uci",
+      "source_data_row": 80046,
+      "source_excel_row": 80047
+    },
+    {
+      "input_row_index": 47,
+      "origin": "uci",
+      "source_data_row": 80047,
+      "source_excel_row": 80048
+    },
+    {
+      "input_row_index": 48,
+      "origin": "uci",
+      "source_data_row": 80048,
+      "source_excel_row": 80049
+    },
+    {
+      "input_row_index": 49,
+      "origin": "uci",
+      "source_data_row": 80049,
+      "source_excel_row": 80050
+    },
+    {
+      "input_row_index": 50,
+      "origin": "uci",
+      "source_data_row": 80050,
+      "source_excel_row": 80051
+    },
+    {
+      "input_row_index": 51,
+      "origin": "uci",
+      "source_data_row": 80051,
+      "source_excel_row": 80052
+    },
+    {
+      "input_row_index": 52,
+      "origin": "uci",
+      "source_data_row": 80052,
+      "source_excel_row": 80053
+    },
+    {
+      "input_row_index": 53,
+      "origin": "uci",
+      "source_data_row": 80053,
+      "source_excel_row": 80054
+    },
+    {
+      "input_row_index": 54,
+      "origin": "uci",
+      "source_data_row": 80054,
+      "source_excel_row": 80055
+    },
+    {
+      "input_row_index": 55,
+      "origin": "uci",
+      "source_data_row": 80055,
+      "source_excel_row": 80056
+    },
+    {
+      "input_row_index": 56,
+      "origin": "uci",
+      "source_data_row": 80056,
+      "source_excel_row": 80057
+    },
+    {
+      "input_row_index": 57,
+      "origin": "uci",
+      "source_data_row": 80057,
+      "source_excel_row": 80058
+    },
+    {
+      "input_row_index": 58,
+      "origin": "uci",
+      "source_data_row": 80058,
+      "source_excel_row": 80059
+    },
+    {
+      "input_row_index": 59,
+      "origin": "uci",
+      "source_data_row": 80059,
+      "source_excel_row": 80060
+    },
+    {
+      "input_row_index": 60,
+      "origin": "uci",
+      "source_data_row": 80060,
+      "source_excel_row": 80061
+    },
+    {
+      "input_row_index": 61,
+      "origin": "uci",
+      "source_data_row": 80061,
+      "source_excel_row": 80062
+    },
+    {
+      "input_row_index": 62,
+      "origin": "uci",
+      "source_data_row": 80062,
+      "source_excel_row": 80063
+    },
+    {
+      "input_row_index": 63,
+      "origin": "uci",
+      "source_data_row": 80063,
+      "source_excel_row": 80064
+    },
+    {
+      "input_row_index": 64,
+      "origin": "uci",
+      "source_data_row": 80064,
+      "source_excel_row": 80065
+    },
+    {
+      "input_row_index": 65,
+      "origin": "uci",
+      "source_data_row": 80065,
+      "source_excel_row": 80066
+    },
+    {
+      "input_row_index": 66,
+      "origin": "uci",
+      "source_data_row": 80066,
+      "source_excel_row": 80067
+    },
+    {
+      "input_row_index": 67,
+      "origin": "uci",
+      "source_data_row": 80067,
+      "source_excel_row": 80068
+    },
+    {
+      "input_row_index": 68,
+      "origin": "uci",
+      "source_data_row": 80068,
+      "source_excel_row": 80069
+    },
+    {
+      "input_row_index": 69,
+      "origin": "uci",
+      "source_data_row": 80069,
+      "source_excel_row": 80070
+    },
+    {
+      "input_row_index": 70,
+      "origin": "uci",
+      "source_data_row": 80070,
+      "source_excel_row": 80071
+    },
+    {
+      "input_row_index": 71,
+      "origin": "uci",
+      "source_data_row": 80071,
+      "source_excel_row": 80072
+    },
+    {
+      "input_row_index": 72,
+      "origin": "uci",
+      "source_data_row": 80072,
+      "source_excel_row": 80073
+    },
+    {
+      "input_row_index": 73,
+      "origin": "uci",
+      "source_data_row": 80073,
+      "source_excel_row": 80074
+    },
+    {
+      "input_row_index": 74,
+      "origin": "uci",
+      "source_data_row": 80074,
+      "source_excel_row": 80075
+    },
+    {
+      "input_row_index": 75,
+      "origin": "uci",
+      "source_data_row": 80075,
+      "source_excel_row": 80076
+    },
+    {
+      "input_row_index": 76,
+      "origin": "uci",
+      "source_data_row": 80076,
+      "source_excel_row": 80077
+    },
+    {
+      "input_row_index": 77,
+      "origin": "uci",
+      "source_data_row": 80077,
+      "source_excel_row": 80078
+    },
+    {
+      "input_row_index": 78,
+      "origin": "uci",
+      "source_data_row": 80078,
+      "source_excel_row": 80079
+    },
+    {
+      "input_row_index": 79,
+      "origin": "uci",
+      "source_data_row": 80079,
+      "source_excel_row": 80080
+    },
+    {
+      "input_row_index": 80,
+      "origin": "uci",
+      "source_data_row": 80080,
+      "source_excel_row": 80081
+    },
+    {
+      "input_row_index": 81,
+      "origin": "uci",
+      "source_data_row": 80081,
+      "source_excel_row": 80082
+    },
+    {
+      "input_row_index": 82,
+      "origin": "uci",
+      "source_data_row": 80082,
+      "source_excel_row": 80083
+    },
+    {
+      "input_row_index": 83,
+      "origin": "uci",
+      "source_data_row": 80083,
+      "source_excel_row": 80084
+    },
+    {
+      "input_row_index": 84,
+      "origin": "uci",
+      "source_data_row": 80084,
+      "source_excel_row": 80085
+    },
+    {
+      "input_row_index": 85,
+      "origin": "uci",
+      "source_data_row": 80085,
+      "source_excel_row": 80086
+    },
+    {
+      "input_row_index": 86,
+      "origin": "uci",
+      "source_data_row": 80086,
+      "source_excel_row": 80087
+    },
+    {
+      "input_row_index": 87,
+      "origin": "uci",
+      "source_data_row": 80087,
+      "source_excel_row": 80088
+    },
+    {
+      "input_row_index": 88,
+      "origin": "uci",
+      "source_data_row": 80088,
+      "source_excel_row": 80089
+    },
+    {
+      "input_row_index": 89,
+      "origin": "uci",
+      "source_data_row": 80089,
+      "source_excel_row": 80090
+    },
+    {
+      "input_row_index": 90,
+      "origin": "uci",
+      "source_data_row": 80090,
+      "source_excel_row": 80091
+    },
+    {
+      "input_row_index": 91,
+      "origin": "uci",
+      "source_data_row": 80091,
+      "source_excel_row": 80092
+    },
+    {
+      "input_row_index": 92,
+      "origin": "uci",
+      "source_data_row": 80092,
+      "source_excel_row": 80093
+    },
+    {
+      "input_row_index": 93,
+      "origin": "uci",
+      "source_data_row": 80093,
+      "source_excel_row": 80094
+    },
+    {
+      "input_row_index": 94,
+      "origin": "uci",
+      "source_data_row": 80094,
+      "source_excel_row": 80095
+    },
+    {
+      "input_row_index": 95,
+      "origin": "uci",
+      "source_data_row": 80095,
+      "source_excel_row": 80096
+    },
+    {
+      "input_row_index": 96,
+      "origin": "uci",
+      "source_data_row": 80096,
+      "source_excel_row": 80097
+    },
+    {
+      "input_row_index": 97,
+      "origin": "uci",
+      "source_data_row": 80097,
+      "source_excel_row": 80098
+    },
+    {
+      "input_row_index": 98,
+      "origin": "uci",
+      "source_data_row": 80098,
+      "source_excel_row": 80099
+    },
+    {
+      "input_row_index": 99,
+      "origin": "uci",
+      "source_data_row": 80099,
+      "source_excel_row": 80100
+    },
+    {
+      "input_row_index": 100,
+      "origin": "uci",
+      "source_data_row": 80100,
+      "source_excel_row": 80101
+    },
+    {
+      "input_row_index": 101,
+      "origin": "uci",
+      "source_data_row": 80101,
+      "source_excel_row": 80102
+    },
+    {
+      "input_row_index": 102,
+      "origin": "uci",
+      "source_data_row": 80102,
+      "source_excel_row": 80103
+    },
+    {
+      "input_row_index": 103,
+      "origin": "uci",
+      "source_data_row": 80103,
+      "source_excel_row": 80104
+    },
+    {
+      "input_row_index": 104,
+      "origin": "uci",
+      "source_data_row": 80104,
+      "source_excel_row": 80105
+    },
+    {
+      "input_row_index": 105,
+      "origin": "uci",
+      "source_data_row": 80105,
+      "source_excel_row": 80106
+    },
+    {
+      "input_row_index": 106,
+      "origin": "uci",
+      "source_data_row": 80106,
+      "source_excel_row": 80107
+    },
+    {
+      "input_row_index": 107,
+      "origin": "uci",
+      "source_data_row": 80107,
+      "source_excel_row": 80108
+    },
+    {
+      "input_row_index": 108,
+      "origin": "uci",
+      "source_data_row": 80108,
+      "source_excel_row": 80109
+    },
+    {
+      "input_row_index": 109,
+      "origin": "uci",
+      "source_data_row": 80109,
+      "source_excel_row": 80110
+    },
+    {
+      "input_row_index": 110,
+      "origin": "uci",
+      "source_data_row": 80110,
+      "source_excel_row": 80111
+    },
+    {
+      "input_row_index": 111,
+      "origin": "uci",
+      "source_data_row": 80111,
+      "source_excel_row": 80112
+    },
+    {
+      "input_row_index": 112,
+      "origin": "uci",
+      "source_data_row": 80112,
+      "source_excel_row": 80113
+    },
+    {
+      "input_row_index": 113,
+      "origin": "uci",
+      "source_data_row": 80113,
+      "source_excel_row": 80114
+    },
+    {
+      "input_row_index": 114,
+      "origin": "uci",
+      "source_data_row": 80114,
+      "source_excel_row": 80115
+    },
+    {
+      "input_row_index": 115,
+      "origin": "uci",
+      "source_data_row": 80115,
+      "source_excel_row": 80116
+    },
+    {
+      "input_row_index": 116,
+      "origin": "uci",
+      "source_data_row": 80116,
+      "source_excel_row": 80117
+    },
+    {
+      "input_row_index": 117,
+      "origin": "uci",
+      "source_data_row": 80117,
+      "source_excel_row": 80118
+    },
+    {
+      "input_row_index": 118,
+      "origin": "uci",
+      "source_data_row": 80118,
+      "source_excel_row": 80119
+    },
+    {
+      "input_row_index": 119,
+      "origin": "uci",
+      "source_data_row": 80119,
+      "source_excel_row": 80120
+    },
+    {
+      "input_row_index": 120,
+      "origin": "uci",
+      "source_data_row": 80120,
+      "source_excel_row": 80121
+    },
+    {
+      "input_row_index": 121,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 122,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 123,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 124,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 125,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 126,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 127,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 128,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 129,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 130,
+      "origin": "synthetic_control",
+      "label": "synthetic price reference",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 131,
+      "origin": "synthetic_control",
+      "label": "stipulated legitimate cancellation",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 132,
+      "origin": "synthetic_control",
+      "label": "stipulated multi-product order",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 133,
+      "origin": "synthetic_control",
+      "label": "stipulated multi-product order",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 134,
+      "origin": "synthetic_control",
+      "label": "stipulated two legitimate identical sale events",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 135,
+      "origin": "synthetic_control",
+      "label": "stipulated two legitimate identical sale events",
+      "based_on_source_data_row": 80001
+    },
+    {
+      "input_row_index": 136,
+      "origin": "synthetic_control",
+      "label": "stipulated legitimate premium product",
+      "based_on_source_data_row": 80001
+    }
+  ],
+  "injections": [
+    {
+      "kind": "numeric_corruption",
+      "rule_id": "numeric_parse",
+      "expected_severity": "error",
+      "input_row_indices": [
+        17
+      ],
+      "cell_diff": [
+        {
+          "input_row_index": 17,
+          "source_data_row": 80017,
+          "column": "Quantity",
+          "before": "1",
+          "after": "two"
+        }
+      ]
+    },
+    {
+      "kind": "numeric_corruption",
+      "rule_id": "numeric_parse",
+      "expected_severity": "error",
+      "input_row_indices": [
+        19
+      ],
+      "cell_diff": [
+        {
+          "input_row_index": 19,
+          "source_data_row": 80019,
+          "column": "UnitPrice",
+          "before": "2.46",
+          "after": "1.2.3"
+        }
+      ]
+    }
+  ],
+  "controls": [
+    {
+      "kind": "price_reference",
+      "input_row_indices": [
+        121,
+        122,
+        123,
+        124,
+        125,
+        126,
+        127,
+        128,
+        129,
+        130
+      ],
+      "allowed_review_rules": []
+    },
+    {
+      "kind": "legitimate_cancellation",
+      "input_row_indices": [
+        131
+      ],
+      "allowed_review_rules": []
+    },
+    {
+      "kind": "multi_product_order",
+      "input_row_indices": [
+        132,
+        133
+      ],
+      "allowed_review_rules": []
+    },
+    {
+      "kind": "legitimate_repeat",
+      "input_row_indices": [
+        134,
+        135
+      ],
+      "allowed_review_rules": [
+        "duplicate_rows"
+      ]
+    },
+    {
+      "kind": "legitimate_premium_price",
+      "input_row_indices": [
+        136
+      ],
+      "allowed_review_rules": [
+        "price_outlier"
+      ]
+    }
+  ],
+  "oracle_repairs": [
+    {
+      "kind": "set_cell",
+      "row_indices": [
+        17
+      ],
+      "column": "Quantity",
+      "value": "1"
+    },
+    {
+      "kind": "set_cell",
+      "row_indices": [
+        19
+      ],
+      "column": "UnitPrice",
+      "value": "2.46"
+    }
+  ],
+  "answer": {
+    "known_injection_events": 2,
+    "restoration_target": "included row values exactly equal baseline in order",
+    "price_spike_policy": "review only: ground truth records the intentional edit, not that any high price must be wrong"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "project_version": "0.1.0",
+  "modules": {
+    "data_detective.engine": "D:\\Project\\data-detective\\src\\data_detective\\engine.py",
+    "data_detective.store": "D:\\Project\\data-detective\\src\\data_detective\\store.py",
+    "data_detective.exports": "D:\\Project\\data-detective\\src\\data_detective\\exports.py",
+    "pandas": "D:\\Project\\data-detective\\.venv-clean\\Lib\\site-packages\\pandas\\__init__.py",
+    "streamlit": "D:\\Project\\data-detective\\.venv-clean\\Lib\\site-packages\\streamlit\\__init__.py",
+    "plotly": "D:\\Project\\data-detective\\.venv-clean\\Lib\\site-packages\\plotly\\__init__.py"
+  }
+}

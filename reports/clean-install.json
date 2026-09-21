@@ -1,0 +1,295 @@
+{
+  "status": "pass",
+  "started_at": "2026-09-20T22:52:36.237165+00:00",
+  "finished_at": "2026-09-20T22:54:30.342872+00:00",
+  "source_environment": {
+    "prefix": "D:\\Project\\data-detective\\.venv",
+    "inherited_system_site_packages": true,
+    "modified": false
+  },
+  "isolation": {
+    "python": "3.12.0",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "machine": "AMD64",
+    "prefix": "D:\\Project\\data-detective\\.venv-clean",
+    "base_prefix": "C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312",
+    "is_venv": true,
+    "include_system_site_packages": false,
+    "user_site_enabled": false,
+    "external_site_package_paths": [],
+    "pyvenv_cfg": "home = C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\ninclude-system-site-packages = false\nversion = 3.12.0\nexecutable = D:\\Project\\data-detective\\.venv\\Scripts\\python.exe\ncommand = D:\\Project\\data-detective\\.venv\\Scripts\\python.exe -m venv D:\\Project\\data-detective\\.venv-clean\n"
+  },
+  "dependency_install": {
+    "command": [
+      ".venv-clean/Scripts/python.exe",
+      "-m",
+      "pip",
+      "install",
+      "--disable-pip-version-check",
+      "-r",
+      "requirements-dev-windows.lock"
+    ],
+    "exit_code": 0,
+    "fresh_environment": true,
+    "used_pip_download_cache": true,
+    "note": "The dev lock contains the complete runtime and developer closures."
+  },
+  "locks": {
+    "requirements-windows.lock": {
+      "sha256": "7d370b4013baa7fd922e63f47b4e7866d60ce1504a02a94fc1ce25da405c0110",
+      "package_count": 39,
+      "versions_match": true,
+      "mismatches": {},
+      "metadata_closure_matches": true
+    },
+    "requirements-dev-windows.lock": {
+      "sha256": "17dec52183c2fa8c99ad59c6ad385b91a0b4c7ada911559d90998ee4bcc570dd",
+      "package_count": 46,
+      "versions_match": true,
+      "mismatches": {},
+      "metadata_closure_matches": true
+    }
+  },
+  "checks": {
+    "editable_install": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "install",
+        "--disable-pip-version-check",
+        "--no-deps",
+        "-e",
+        "."
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 4.728,
+      "stdout": "Obtaining file:///D:/Project/data-detective\n  Installing build dependencies: started\n  Installing build dependencies: finished with status 'done'\n  Checking if build backend supports build_editable: started\n  Checking if build backend supports build_editable: finished with status 'done'\n  Getting requirements to build editable: started\n  Getting requirements to build editable: finished with status 'done'\n  Preparing editable metadata (pyproject.toml): started\n  Preparing editable metadata (pyproject.toml): finished with status 'done'\nBuilding wheels for collected packages: data-detective\n  Building editable for data-detective (pyproject.toml): started\n  Building editable for data-detective (pyproject.toml): finished with status 'done'\n  Created wheel for data-detective: filename=data_detective-0.1.0-0.editable-py3-none-any.whl size=1756 sha256=5bb4bedcd13cdab36cce7b13b5539bf0d6199893257a1721a3c31898ca457166\n  Stored in directory: C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Temp\\pip-ephem-wheel-cache-0owusut3\\wheels\\ec\\6d\\ba\\b16b6167d5272e47a7baa9879f608ab2043b673d7893825dcd\nSuccessfully built data-detective\nInstalling collected packages: data-detective\nSuccessfully installed data-detective-0.1.0",
+      "stderr": ""
+    },
+    "pip_check": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "pip",
+        "check"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.607,
+      "stdout": "No broken requirements found.",
+      "stderr": ""
+    },
+    "pytest": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "pytest",
+        "-q",
+        "--junitxml=.venv-clean/verification-junit.xml"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 7.723,
+      "stdout": "........................................................................ [ 54%]\n.............................................................            [100%]\n============================== warnings summary ===============================\ntests/test_app.py::test_demo_repair_save_restore_and_recommendation\n  D:\\Project\\data-detective\\.venv-clean\\Lib\\site-packages\\dateutil\\tz\\tz.py:37: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).\n    EPOCH = datetime.datetime.utcfromtimestamp(0)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: D:\\Project\\data-detective\\.venv-clean\\verification-junit.xml -\n133 passed, 1 warning in 7.25s",
+      "stderr": ""
+    },
+    "ruff": {
+      "command": [
+        ".venv-clean\\Scripts\\python.exe",
+        "-m",
+        "ruff",
+        "check",
+        "src",
+        "tests",
+        "scripts"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.112,
+      "stdout": "All checks passed!",
+      "stderr": ""
+    }
+  },
+  "pytest_counts": {
+    "tests": 133,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "installed_packages": {
+    "altair": "6.3.0",
+    "anyio": "4.15.1",
+    "attrs": "26.1.0",
+    "certifi": "2023.11.17",
+    "charset-normalizer": "3.3.2",
+    "click": "8.5.0",
+    "colorama": "0.4.6",
+    "data-detective": "0.1.0",
+    "et-xmlfile": "2.0.0",
+    "h11": "0.16.0",
+    "httptools": "0.8.0",
+    "idna": "3.6",
+    "iniconfig": "2.0.0",
+    "itsdangerous": "2.2.0",
+    "jinja2": "3.1.2",
+    "jsonschema": "4.26.0",
+    "jsonschema-specifications": "2025.9.1",
+    "markupsafe": "2.1.3",
+    "narwhals": "2.26.0",
+    "numpy": "1.26.2",
+    "openpyxl": "3.1.5",
+    "packaging": "24.0",
+    "pandas": "2.3.3",
+    "pillow": "11.1.0",
+    "pip": "23.2.1",
+    "plotly": "6.9.0",
+    "pluggy": "1.5.0",
+    "protobuf": "7.36.2",
+    "pyarrow": "25.0.1",
+    "pydeck": "0.9.3",
+    "pytest": "8.3.4",
+    "python-dateutil": "2.8.2",
+    "python-multipart": "0.0.32",
+    "pytz": "2023.3.post1",
+    "referencing": "0.37.0",
+    "requests": "2.34.2",
+    "rpds-py": "2026.6.3",
+    "ruff": "0.16.8",
+    "six": "1.16.0",
+    "starlette": "1.6.0",
+    "streamlit": "1.64.0",
+    "toml": "0.10.2",
+    "typing-extensions": "4.16.0",
+    "tzdata": "2023.3",
+    "urllib3": "2.1.0",
+    "uvicorn": "0.53.0",
+    "watchdog": "6.0.0",
+    "websockets": "16.1.1"
+  },
+  "model_packages_present": [],
+  "limitations": [
+    "Windows x64 / CPython 3.12 verification only.",
+    "Version locks do not include wheel hashes or isolated build backend versions.",
+    "Editable installation used pip build isolation for the declared setuptools build backend.",
+    "No GPU dependencies were installed and no real model inference was run in this environment."
+  ],
+  "verification_attempts": [
+    {
+      "label": "initial_clean_install",
+      "environment_overrides": {
+        "PYTHONUTF8": "1",
+        "PYTHONIOENCODING": "utf-8",
+        "PYTHONNOUSERSITE": "1"
+      },
+      "pytest_counts": {
+        "tests": 132,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "checks": {
+        "editable_install": {
+          "command": [
+            ".venv-clean\\Scripts\\python.exe",
+            "-m",
+            "pip",
+            "install",
+            "--disable-pip-version-check",
+            "--no-deps",
+            "-e",
+            "."
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 4.728,
+          "stdout": "Obtaining file:///D:/Project/data-detective\n  Installing build dependencies: started\n  Installing build dependencies: finished with status 'done'\n  Checking if build backend supports build_editable: started\n  Checking if build backend supports build_editable: finished with status 'done'\n  Getting requirements to build editable: started\n  Getting requirements to build editable: finished with status 'done'\n  Preparing editable metadata (pyproject.toml): started\n  Preparing editable metadata (pyproject.toml): finished with status 'done'\nBuilding wheels for collected packages: data-detective\n  Building editable for data-detective (pyproject.toml): started\n  Building editable for data-detective (pyproject.toml): finished with status 'done'\n  Created wheel for data-detective: filename=data_detective-0.1.0-0.editable-py3-none-any.whl size=1756 sha256=5bb4bedcd13cdab36cce7b13b5539bf0d6199893257a1721a3c31898ca457166\n  Stored in directory: C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Temp\\pip-ephem-wheel-cache-0owusut3\\wheels\\ec\\6d\\ba\\b16b6167d5272e47a7baa9879f608ab2043b673d7893825dcd\nSuccessfully built data-detective\nInstalling collected packages: data-detective\nSuccessfully installed data-detective-0.1.0",
+          "stderr": ""
+        },
+        "pip_check": {
+          "command": [
+            ".venv-clean\\Scripts\\python.exe",
+            "-m",
+            "pip",
+            "check"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.622,
+          "stdout": "No broken requirements found.",
+          "stderr": ""
+        },
+        "pytest": {
+          "command": [
+            ".venv-clean\\Scripts\\python.exe",
+            "-m",
+            "pytest",
+            "-q",
+            "--junitxml=.venv-clean/verification-junit.xml"
+          ],
+          "exit_code": 1,
+          "elapsed_seconds": 9.693,
+          "stdout": "....................................F................................... [ 54%]\n............................................................             [100%]\n================================== FAILURES ===================================\n______________ test_actual_timeout_terminates_windows_descendant ______________\n\ntmp_path = WindowsPath('C:/Users/Administrator.DESKTOP-550AABJ/AppData/Local/Temp/pytest-of-Administrator/pytest-381/test_actual_timeout_terminates0')\n\n    @pytest.mark.skipif(os.name != \"nt\", reason=\"Regression for Windows venv launcher process trees\")\n    def test_actual_timeout_terminates_windows_descendant(tmp_path):\n        marker = tmp_path / \"descendant.txt\"\n        child_code = \"import time; time.sleep(60)\"\n        parent_code = (\n            \"import subprocess,sys,time; from pathlib import Path; \"\n            \"child=subprocess.Popen([sys.executable,'-c',sys.argv[2]]); \"\n            \"Path(sys.argv[1]).write_text(str(child.pid)); time.sleep(60)\"\n        )\n        with pytest.raises(subprocess.TimeoutExpired):\n            advisor._run_worker([sys.executable, \"-c\", parent_code, str(marker), child_code],\n                                timeout=2, env=os.environ.copy())\n        assert marker.is_file(), \"The descendant must have started for this regression test\"\n        child_pid = int(marker.read_text())\n        process_list = subprocess.run([\"tasklist\", \"/FI\", f\"PID eq {child_pid}\", \"/FO\", \"CSV\", \"/NH\"],\n                                      capture_output=True, text=True, check=True, timeout=10,\n                                      creationflags=subprocess.CREATE_NO_WINDOW)\n>       assert f'\"{child_pid}\"' not in process_list.stdout\nE       TypeError: argument of type 'NoneType' is not iterable\n\ntests\\test_advisor.py:217: TypeError\n============================== warnings summary ===============================\ntests/test_advisor.py::test_actual_timeout_terminates_windows_descendant\n  D:\\Project\\data-detective\\.venv-clean\\Lib\\site-packages\\_pytest\\threadexception.py:82: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-1 (_readerthread)\n  \n  Traceback (most recent call last):\n    File \"C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\threading.py\", line 1052, in _bootstrap_inner\n      self.run()\n    File \"C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\threading.py\", line 989, in run\n      self._target(*self._args, **self._kwargs)\n    File \"C:\\Users\\Administrator.DESKTOP-550AABJ\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\subprocess.py\", line 1597, in _readerthread\n      buffer.append(fh.read())\n                    ^^^^^^^^^\n    File \"<frozen codecs>\", line 322, in decode\n  UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd0 in position 0: invalid continuation byte\n  \n    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))\n\ntests/test_app.py::test_demo_repair_save_restore_and_recommendation\n  D:\\Project\\data-detective\\.venv-clean\\Lib\\site-packages\\dateutil\\tz\\tz.py:37: DeprecationWarning: datetime.datetime.utcfromtimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC).\n    EPOCH = datetime.datetime.utcfromtimestamp(0)\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: D:\\Project\\data-detective\\.venv-clean\\verification-junit.xml -\n=========================== short test summary info ===========================\nFAILED tests/test_advisor.py::test_actual_timeout_terminates_windows_descendant\n1 failed, 131 passed, 2 warnings in 9.16s",
+          "stderr": ""
+        },
+        "ruff": {
+          "command": [
+            ".venv-clean\\Scripts\\python.exe",
+            "-m",
+            "ruff",
+            "check",
+            "src",
+            "tests",
+            "scripts"
+          ],
+          "exit_code": 0,
+          "elapsed_seconds": 0.476,
+          "stdout": "All checks passed!",
+          "stderr": ""
+        }
+      }
+    }
+  ],
+  "resolved_issue": {
+    "initial_failure": "Windows tasklist output used the native code page, while UTF-8 mode made subprocess text decoding assume UTF-8. The process-tree regression received stdout=None after a decoding-thread failure.",
+    "fix": "The tasklist regression captures bytes and compares the ASCII PID bytes, avoiding locale-dependent decoding.",
+    "verification_environment": "The final run retained PYTHONUTF8=1 and the same clean environment; no check was skipped."
+  },
+  "core_only_resolver_check": {
+    "command": [
+      ".venv-clean/Scripts/python.exe",
+      "-m",
+      "pip",
+      "install",
+      "--dry-run",
+      "--ignore-installed",
+      "-r",
+      "requirements-windows.lock",
+      "--report",
+      ".venv-clean/core-resolution.json"
+    ],
+    "exit_code": 0,
+    "resolved_package_count": 39,
+    "exactly_matches_runtime_lock": true,
+    "note": "Independent pip resolution using no already-installed packages; this check did not install another environment."
+  },
+  "source_file_hashes": {
+    "src/data_detective/__init__.py": "2e29cb2dc0205fd364fe7fd05563f4f360e93af59a62d7243f65243958c11cab",
+    "src/data_detective/advisor.py": "5fad70fbc4b0e99eeafb24a799e673763cd9b97b5ee6c8ffd501a790793345a3",
+    "src/data_detective/cli.py": "ee6a7da166545a314acffbfd441cf7b0959db30a4172fbbc02fb074e04a97180",
+    "src/data_detective/engine.py": "80ed8fcf5519160479ea72cba2b610473132fe998d37d25c9ce35827d91222b8",
+    "src/data_detective/exports.py": "59811ad1e24ea19b8db5809eb92ede97ec6c4dd7bb870675cdbbb9a85020756a",
+    "src/data_detective/model_worker.py": "5f3cf2d84d6d041f0b29064d0f5a70d367f469a4b128c65f2704fc5198b88199",
+    "src/data_detective/models.py": "86791b548f6266d5c44b9edfdf6179fa931f98ece22329d1e8af9b37b1bca904",
+    "src/data_detective/store.py": "dcfc40f8d00534d467e9aba6294e3ee04e41e4e4b8a4961269c6cf574489e6ba",
+    "src/data_detective/ui.py": "a08b132e2ab246583f15190b9193fe2ec7b0a2963bea700ba5f70f41965db949",
+    "tests/test_advisor.py": "37ebaef6e1ef4f8b5e35940761e7f62f91fca65c273e9a641dccc718ab83fb38",
+    "tests/test_app.py": "cde66ad68663015dd5c6560fb35791ed59ed4f98ea92445052593193ab618743",
+    "tests/test_cases.py": "9c0bbc016ddba21f3eec89bd555dd71ecb64c74ac319bd42171c0d709d20168d",
+    "tests/test_engine.py": "1569cc0c9ee917afb697a5c451a04db2a0a90e191a17c5b0dbb880fe2ac2d8d7",
+    "tests/test_regressions.py": "042ebd022d596ff11272acc104119f50a14e8e9ee46de89890ab2f67d0c46721",
+    "tests/test_store.py": "77335d29af3c54f4c1faf9231e42a7095062fbcdbb9bc8c84a1b1cddfbdb8475",
+    "scripts/benchmark.py": "632edf0302b802d548961f0c89cbf75ea13951332bdda6799cb1dfe9a8852605",
+    "scripts/build_cases.py": "9a877d470c34841328dd61b65c96303339ddb4093afc89740241cb3199f5fbc1",
+    "scripts/evaluate.py": "c0b9490ae021abc0812148846d6b63570fa275e3aa1fa467a60b6f91bf2bd482",
+    "scripts/evaluate_advisor.py": "3e4d0baa13354df779641d939bea196928ec504006e0fb2b48c91d92736ba2bb",
+    "scripts/fetch_corpus.py": "4759a4efb0541c72d2e3ce6913f443c791ab28e9cf64fb4242195c3bf81ed91c",
+    "scripts/lock_dependencies.py": "6de0ed9d18258a321d376646c3b338ce9f22b47f7b5696e05e6c967c767cb7d7",
+    "pyproject.toml": "c2fdd82676d7de026d29f6ac858e329b04832eab38147dfa1380b3ce66bfe02b"
+  }
+}

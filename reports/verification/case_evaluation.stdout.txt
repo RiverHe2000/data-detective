@@ -1,0 +1,242 @@
+{
+  "dev": {
+    "cases": 6,
+    "injections": {
+      "date_corruption": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 4,
+        "detected_rows": 4,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 4
+      },
+      "numeric_corruption": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 4,
+        "detected_rows": 4,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 4
+      },
+      "copied_records": {
+        "events": 2,
+        "detected": 2,
+        "target_rows": 6,
+        "detected_rows": 6,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 6
+      },
+      "missing_value": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 4,
+        "detected_rows": 4,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 4
+      },
+      "price_spike": {
+        "events": 2,
+        "detected": 2,
+        "target_rows": 2,
+        "detected_rows": 2,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 2
+      }
+    },
+    "controls": {
+      "price_reference": {
+        "rows": 60,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_cancellation": {
+        "rows": 6,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "multi_product_order": {
+        "rows": 12,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_repeat": {
+        "rows": 12,
+        "error_rows": 0,
+        "review_rows": 12,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_premium_price": {
+        "rows": 6,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      }
+    },
+    "oracle_restorations": 6,
+    "independent_metric_checks": 18,
+    "independent_metric_check_total": 18
+  },
+  "test": {
+    "cases": 6,
+    "injections": {
+      "date_corruption": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 4,
+        "detected_rows": 4,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 4
+      },
+      "numeric_corruption": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 4,
+        "detected_rows": 4,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 4
+      },
+      "copied_records": {
+        "events": 2,
+        "detected": 2,
+        "target_rows": 6,
+        "detected_rows": 6,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 6
+      },
+      "missing_value": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 4,
+        "detected_rows": 4,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 4
+      },
+      "price_spike": {
+        "events": 2,
+        "detected": 2,
+        "target_rows": 2,
+        "detected_rows": 2,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 2
+      }
+    },
+    "controls": {
+      "price_reference": {
+        "rows": 60,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_cancellation": {
+        "rows": 6,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "multi_product_order": {
+        "rows": 12,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_repeat": {
+        "rows": 12,
+        "error_rows": 0,
+        "review_rows": 12,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_premium_price": {
+        "rows": 6,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      }
+    },
+    "oracle_restorations": 6,
+    "independent_metric_checks": 18,
+    "independent_metric_check_total": 18
+  },
+  "all": {
+    "cases": 12,
+    "injections": {
+      "date_corruption": {
+        "events": 8,
+        "detected": 8,
+        "target_rows": 8,
+        "detected_rows": 8,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 8
+      },
+      "numeric_corruption": {
+        "events": 8,
+        "detected": 8,
+        "target_rows": 8,
+        "detected_rows": 8,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 8
+      },
+      "copied_records": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 12,
+        "detected_rows": 12,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 12
+      },
+      "missing_value": {
+        "events": 8,
+        "detected": 8,
+        "target_rows": 8,
+        "detected_rows": 8,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 8
+      },
+      "price_spike": {
+        "events": 4,
+        "detected": 4,
+        "target_rows": 4,
+        "detected_rows": 4,
+        "pre_existing_rows": 0,
+        "incremental_detected_rows": 4
+      }
+    },
+    "controls": {
+      "price_reference": {
+        "rows": 120,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_cancellation": {
+        "rows": 12,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "multi_product_order": {
+        "rows": 24,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_repeat": {
+        "rows": 24,
+        "error_rows": 0,
+        "review_rows": 24,
+        "unexpected_review_rows": 0
+      },
+      "legitimate_premium_price": {
+        "rows": 12,
+        "error_rows": 0,
+        "review_rows": 0,
+        "unexpected_review_rows": 0
+      }
+    },
+    "oracle_restorations": 12,
+    "independent_metric_checks": 36,
+    "independent_metric_check_total": 36
+  }
+}

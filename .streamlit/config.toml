@@ -1,0 +1,18 @@
+[theme]
+base = "light"
+primaryColor = "#087f74"
+backgroundColor = "#f7f8fa"
+secondaryBackgroundColor = "#edf1f3"
+textColor = "#182b3a"
+font = "sans serif"
+
+[server]
+address = "127.0.0.1"
+port = 8503
+maxUploadSize = 20
+headless = true
+fileWatcherType = "poll"
+runOnSave = true
+
+[browser]
+gatherUsageStats = false

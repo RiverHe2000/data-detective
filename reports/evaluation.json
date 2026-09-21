@@ -1,0 +1,2241 @@
+{
+  "schema_version": 1,
+  "corpus_lock_sha256": "8dd0bb5b8ca8451ba3139187033b272ad512d90c282b332623c1e3bc1ef26853",
+  "truth_statement": "Baseline is a reference, not ground truth. Scores cover only explicit injections and stipulated synthetic controls.",
+  "summary": {
+    "dev": {
+      "cases": 6,
+      "injections": {
+        "date_corruption": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 4,
+          "detected_rows": 4,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 4
+        },
+        "numeric_corruption": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 4,
+          "detected_rows": 4,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 4
+        },
+        "copied_records": {
+          "events": 2,
+          "detected": 2,
+          "target_rows": 6,
+          "detected_rows": 6,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 6
+        },
+        "missing_value": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 4,
+          "detected_rows": 4,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 4
+        },
+        "price_spike": {
+          "events": 2,
+          "detected": 2,
+          "target_rows": 2,
+          "detected_rows": 2,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 2
+        }
+      },
+      "controls": {
+        "price_reference": {
+          "rows": 60,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_cancellation": {
+          "rows": 6,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "multi_product_order": {
+          "rows": 12,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_repeat": {
+          "rows": 12,
+          "error_rows": 0,
+          "review_rows": 12,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_premium_price": {
+          "rows": 6,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        }
+      },
+      "oracle_restorations": 6,
+      "independent_metric_checks": 18,
+      "independent_metric_check_total": 18
+    },
+    "test": {
+      "cases": 6,
+      "injections": {
+        "date_corruption": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 4,
+          "detected_rows": 4,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 4
+        },
+        "numeric_corruption": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 4,
+          "detected_rows": 4,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 4
+        },
+        "copied_records": {
+          "events": 2,
+          "detected": 2,
+          "target_rows": 6,
+          "detected_rows": 6,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 6
+        },
+        "missing_value": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 4,
+          "detected_rows": 4,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 4
+        },
+        "price_spike": {
+          "events": 2,
+          "detected": 2,
+          "target_rows": 2,
+          "detected_rows": 2,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 2
+        }
+      },
+      "controls": {
+        "price_reference": {
+          "rows": 60,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_cancellation": {
+          "rows": 6,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "multi_product_order": {
+          "rows": 12,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_repeat": {
+          "rows": 12,
+          "error_rows": 0,
+          "review_rows": 12,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_premium_price": {
+          "rows": 6,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        }
+      },
+      "oracle_restorations": 6,
+      "independent_metric_checks": 18,
+      "independent_metric_check_total": 18
+    },
+    "all": {
+      "cases": 12,
+      "injections": {
+        "date_corruption": {
+          "events": 8,
+          "detected": 8,
+          "target_rows": 8,
+          "detected_rows": 8,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 8
+        },
+        "numeric_corruption": {
+          "events": 8,
+          "detected": 8,
+          "target_rows": 8,
+          "detected_rows": 8,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 8
+        },
+        "copied_records": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 12,
+          "detected_rows": 12,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 12
+        },
+        "missing_value": {
+          "events": 8,
+          "detected": 8,
+          "target_rows": 8,
+          "detected_rows": 8,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 8
+        },
+        "price_spike": {
+          "events": 4,
+          "detected": 4,
+          "target_rows": 4,
+          "detected_rows": 4,
+          "pre_existing_rows": 0,
+          "incremental_detected_rows": 4
+        }
+      },
+      "controls": {
+        "price_reference": {
+          "rows": 120,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_cancellation": {
+          "rows": 12,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "multi_product_order": {
+          "rows": 24,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_repeat": {
+          "rows": 24,
+          "error_rows": 0,
+          "review_rows": 24,
+          "unexpected_review_rows": 0
+        },
+        "legitimate_premium_price": {
+          "rows": 12,
+          "error_rows": 0,
+          "review_rows": 0,
+          "unexpected_review_rows": 0
+        }
+      },
+      "oracle_restorations": 12,
+      "independent_metric_checks": 36,
+      "independent_metric_check_total": 36
+    }
+  },
+  "cases": [
+    {
+      "case_id": "dev-broken-dates",
+      "split": "dev",
+      "injections": [
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            27
+          ],
+          "detected_rows": [
+            27
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            27
+          ]
+        },
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            31
+          ],
+          "detected_rows": [
+            31
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            31
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 1
+      },
+      "input_finding_counts": {
+        "date_parse": 1,
+        "duplicate_rows": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "3203.66",
+        "monthly": {
+          "2011-01": "59.50",
+          "2011-03": "3144.16"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "3203.66",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "59.50",
+          "2011-03": "3144.16"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "3203.66",
+        "unassigned_amount": "37.20",
+        "invalid_date_rows": 2,
+        "monthly": {
+          "2011-01": "59.50",
+          "2011-03": "3106.96"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "3203.66",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "59.50",
+          "2011-03": "3144.16"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "dev-broken-numbers",
+      "split": "dev",
+      "injections": [
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            17
+          ],
+          "detected_rows": [
+            17
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            17
+          ]
+        },
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            19
+          ],
+          "detected_rows": [
+            19
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            19
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 1
+      },
+      "input_finding_counts": {
+        "numeric_parse": 2,
+        "duplicate_rows": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "2648.58",
+        "monthly": {
+          "2011-01": "32.90",
+          "2011-02": "2615.68"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2648.58",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "32.90",
+          "2011-02": "2615.68"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 134,
+        "invalid_amount_rows": 2,
+        "net_amount": "2639.53",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "32.90",
+          "2011-02": "2606.63"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2648.58",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "32.90",
+          "2011-02": "2615.68"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "dev-duplicate-dispatch",
+      "split": "dev",
+      "injections": [
+        {
+          "kind": "copied_records",
+          "expected_rule": "duplicate_rows",
+          "expected_severity": "review",
+          "targets": [
+            137,
+            138,
+            139
+          ],
+          "detected_rows": [
+            137,
+            138,
+            139
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            137,
+            138,
+            139
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 1
+      },
+      "input_finding_counts": {
+        "duplicate_rows": 4
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "4593.97",
+        "monthly": {
+          "2010-12": "4568.47",
+          "2011-01": "25.50"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "4593.97",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2010-12": "4568.47",
+          "2011-01": "25.50"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 139,
+        "included_rows": 139,
+        "excluded_rows": 0,
+        "amount_rows": 139,
+        "invalid_amount_rows": 0,
+        "net_amount": "4701.37",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2010-12": "4675.87",
+          "2011-01": "25.50"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 139,
+        "included_rows": 136,
+        "excluded_rows": 3,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "4593.97",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2010-12": "4568.47",
+          "2011-01": "25.50"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "dev-missing-fields",
+      "split": "dev",
+      "injections": [
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            6
+          ],
+          "detected_rows": [
+            6
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            6
+          ]
+        },
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            12
+          ],
+          "detected_rows": [
+            12
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            12
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 1
+      },
+      "input_finding_counts": {
+        "missing_required": 2,
+        "duplicate_rows": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "3940.32",
+        "monthly": {
+          "2010-12": "3796.02",
+          "2011-01": "144.30"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "3940.32",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2010-12": "3796.02",
+          "2011-01": "144.30"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 135,
+        "invalid_amount_rows": 1,
+        "net_amount": "3932.70",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2010-12": "3788.40",
+          "2011-01": "144.30"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "3940.32",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2010-12": "3796.02",
+          "2011-01": "144.30"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "dev-mixed-incident",
+      "split": "dev",
+      "injections": [
+        {
+          "kind": "copied_records",
+          "expected_rule": "duplicate_rows",
+          "expected_severity": "review",
+          "targets": [
+            137,
+            138,
+            139
+          ],
+          "detected_rows": [
+            137,
+            138,
+            139
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            137,
+            138,
+            139
+          ]
+        },
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            6
+          ],
+          "detected_rows": [
+            6
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            6
+          ]
+        },
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            12
+          ],
+          "detected_rows": [
+            12
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            12
+          ]
+        },
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            17
+          ],
+          "detected_rows": [
+            17
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            17
+          ]
+        },
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            19
+          ],
+          "detected_rows": [
+            19
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            19
+          ]
+        },
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            27
+          ],
+          "detected_rows": [
+            27
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            27
+          ]
+        },
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            31
+          ],
+          "detected_rows": [
+            31
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            31
+          ]
+        },
+        {
+          "kind": "price_spike",
+          "expected_rule": "price_outlier",
+          "expected_severity": "review",
+          "targets": [
+            1
+          ],
+          "detected_rows": [
+            1
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            1
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 3
+      },
+      "input_finding_counts": {
+        "missing_required": 2,
+        "numeric_parse": 2,
+        "date_parse": 1,
+        "duplicate_rows": 6,
+        "price_outlier": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "2181.64",
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-05": "2156.14"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2181.64",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-05": "2156.14"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 139,
+        "included_rows": 139,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 3,
+        "net_amount": "17437.69",
+        "unassigned_amount": "9.20",
+        "invalid_date_rows": 2,
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-05": "17402.99"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 139,
+        "included_rows": 136,
+        "excluded_rows": 3,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2181.64",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-05": "2156.14"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "dev-price-spike",
+      "split": "dev",
+      "injections": [
+        {
+          "kind": "price_spike",
+          "expected_rule": "price_outlier",
+          "expected_severity": "review",
+          "targets": [
+            1
+          ],
+          "detected_rows": [
+            1
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            1
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 2
+      },
+      "input_finding_counts": {
+        "duplicate_rows": 2,
+        "price_outlier": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "2704.25",
+        "monthly": {
+          "2011-01": "49.50",
+          "2011-04": "2654.75"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2704.25",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "49.50",
+          "2011-04": "2654.75"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "22484.45",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "49.50",
+          "2011-04": "22434.95"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2704.25",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "49.50",
+          "2011-04": "2654.75"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "test-broken-dates",
+      "split": "test",
+      "injections": [
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            27
+          ],
+          "detected_rows": [
+            27
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            27
+          ]
+        },
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            31
+          ],
+          "detected_rows": [
+            31
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            31
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 2
+      },
+      "input_finding_counts": {
+        "date_parse": 1,
+        "duplicate_rows": 2
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "2918.45",
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-09": "2905.95"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2918.45",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-09": "2905.95"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2918.45",
+        "unassigned_amount": "35.28",
+        "invalid_date_rows": 2,
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-09": "2870.67"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2918.45",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-09": "2905.95"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "test-broken-numbers",
+      "split": "test",
+      "injections": [
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            17
+          ],
+          "detected_rows": [
+            17
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            17
+          ]
+        },
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            19
+          ],
+          "detected_rows": [
+            19
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            19
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 3
+      },
+      "input_finding_counts": {
+        "numeric_parse": 2,
+        "duplicate_rows": 3
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "2400.02",
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-08": "2374.52"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2400.02",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-08": "2374.52"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 134,
+        "invalid_amount_rows": 2,
+        "net_amount": "2374.18",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-08": "2348.68"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2400.02",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "25.50",
+          "2011-08": "2374.52"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "test-duplicate-dispatch",
+      "split": "test",
+      "injections": [
+        {
+          "kind": "copied_records",
+          "expected_rule": "duplicate_rows",
+          "expected_severity": "review",
+          "targets": [
+            137,
+            138,
+            139
+          ],
+          "detected_rows": [
+            137,
+            138,
+            139
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            137,
+            138,
+            139
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 2
+      },
+      "input_finding_counts": {
+        "duplicate_rows": 5
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "2742.38",
+        "monthly": {
+          "2011-01": "8.50",
+          "2011-06": "2733.88"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2742.38",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "8.50",
+          "2011-06": "2733.88"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 139,
+        "included_rows": 139,
+        "excluded_rows": 0,
+        "amount_rows": 139,
+        "invalid_amount_rows": 0,
+        "net_amount": "2730.62",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "8.50",
+          "2011-06": "2722.12"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 139,
+        "included_rows": 136,
+        "excluded_rows": 3,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2742.38",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "8.50",
+          "2011-06": "2733.88"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "test-missing-fields",
+      "split": "test",
+      "injections": [
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            6
+          ],
+          "detected_rows": [
+            6
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            6
+          ]
+        },
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            12
+          ],
+          "detected_rows": [
+            12
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            12
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 1
+      },
+      "input_finding_counts": {
+        "missing_required": 2,
+        "duplicate_rows": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "1945.20",
+        "monthly": {
+          "2011-01": "16.30",
+          "2011-07": "1928.90"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "1945.20",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "16.30",
+          "2011-07": "1928.90"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 135,
+        "invalid_amount_rows": 1,
+        "net_amount": "1941.07",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "16.30",
+          "2011-07": "1924.77"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "1945.20",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "16.30",
+          "2011-07": "1928.90"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "test-mixed-incident",
+      "split": "test",
+      "injections": [
+        {
+          "kind": "copied_records",
+          "expected_rule": "duplicate_rows",
+          "expected_severity": "review",
+          "targets": [
+            137,
+            138,
+            139
+          ],
+          "detected_rows": [
+            137,
+            138,
+            139
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            137,
+            138,
+            139
+          ]
+        },
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            6
+          ],
+          "detected_rows": [
+            6
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            6
+          ]
+        },
+        {
+          "kind": "missing_value",
+          "expected_rule": "missing_required",
+          "expected_severity": "error",
+          "targets": [
+            12
+          ],
+          "detected_rows": [
+            12
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            12
+          ]
+        },
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            17
+          ],
+          "detected_rows": [
+            17
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            17
+          ]
+        },
+        {
+          "kind": "numeric_corruption",
+          "expected_rule": "numeric_parse",
+          "expected_severity": "error",
+          "targets": [
+            19
+          ],
+          "detected_rows": [
+            19
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            19
+          ]
+        },
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            27
+          ],
+          "detected_rows": [
+            27
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            27
+          ]
+        },
+        {
+          "kind": "date_corruption",
+          "expected_rule": "date_parse",
+          "expected_severity": "error",
+          "targets": [
+            31
+          ],
+          "detected_rows": [
+            31
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            31
+          ]
+        },
+        {
+          "kind": "price_spike",
+          "expected_rule": "price_outlier",
+          "expected_severity": "review",
+          "targets": [
+            1
+          ],
+          "detected_rows": [
+            1
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            1
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 4
+      },
+      "input_finding_counts": {
+        "missing_required": 2,
+        "numeric_parse": 2,
+        "date_parse": 1,
+        "duplicate_rows": 7,
+        "price_outlier": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "1592.33",
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-11": "1579.83"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "1592.33",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-11": "1579.83"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 139,
+        "included_rows": 139,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 3,
+        "net_amount": "16550.03",
+        "unassigned_amount": "6.85",
+        "invalid_date_rows": 2,
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-11": "16530.68"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 139,
+        "included_rows": 136,
+        "excluded_rows": 3,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "1592.33",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "12.50",
+          "2011-11": "1579.83"
+        },
+        "currency": "GBP"
+      }
+    },
+    {
+      "case_id": "test-price-spike",
+      "split": "test",
+      "injections": [
+        {
+          "kind": "price_spike",
+          "expected_rule": "price_outlier",
+          "expected_severity": "review",
+          "targets": [
+            1
+          ],
+          "detected_rows": [
+            1
+          ],
+          "detected": true,
+          "pre_existing_same_rule_rows": [],
+          "incremental_detected_rows": [
+            1
+          ]
+        }
+      ],
+      "controls": [
+        {
+          "kind": "price_reference",
+          "n_rows": 10,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_cancellation",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "multi_product_order",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": []
+        },
+        {
+          "kind": "legitimate_repeat",
+          "n_rows": 2,
+          "error_rows": [],
+          "review_rows": [
+            134,
+            135
+          ],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "duplicate_rows"
+          ]
+        },
+        {
+          "kind": "legitimate_premium_price",
+          "n_rows": 1,
+          "error_rows": [],
+          "review_rows": [],
+          "unexpected_review_rows": [],
+          "allowed_review_rules": [
+            "price_outlier"
+          ]
+        }
+      ],
+      "baseline_finding_counts": {
+        "duplicate_rows": 1
+      },
+      "input_finding_counts": {
+        "duplicate_rows": 1,
+        "price_outlier": 1
+      },
+      "oracle_restores_baseline_rows": true,
+      "baseline_metrics_match_independent_oracle": true,
+      "input_metrics_match_independent_oracle": true,
+      "restored_metrics_match_independent_oracle": true,
+      "expected_baseline_financials": {
+        "net_amount": "2209.79",
+        "monthly": {
+          "2011-01": "16.50",
+          "2011-10": "2193.29"
+        },
+        "invalid_amount_rows": 0,
+        "invalid_date_rows": 0,
+        "unassigned_amount": "0"
+      },
+      "baseline_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2209.79",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "16.50",
+          "2011-10": "2193.29"
+        },
+        "currency": "GBP"
+      },
+      "input_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "5506.49",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "16.50",
+          "2011-10": "5489.99"
+        },
+        "currency": "GBP"
+      },
+      "restored_metrics": {
+        "total_rows": 136,
+        "included_rows": 136,
+        "excluded_rows": 0,
+        "amount_rows": 136,
+        "invalid_amount_rows": 0,
+        "net_amount": "2209.79",
+        "unassigned_amount": "0.00",
+        "invalid_date_rows": 0,
+        "monthly": {
+          "2011-01": "16.50",
+          "2011-10": "2193.29"
+        },
+        "currency": "GBP"
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "type": "Annotated real UI screenshot sequence, not real-time capture or user study",
+  "scenes": [
+    {
+      "image": "01-home.png",
+      "sha256": "29a42e5677c8f437f63d65af8316060cfe1f5b2ad4ec724d4cb670a9c68d844e",
+      "duration_seconds": 10,
+      "title": "01 / DATA DETECTIVE",
+      "caption": "A local investigation tool. These are real UI checkpoints, with public/synthetic demo data."
+    },
+    {
+      "image": "10-upload.png",
+      "sha256": "d09f27db2f2af1988a25e70061c37381f55b15b0d9368169c9cf03dc23bd7e2a",
+      "duration_seconds": 12,
+      "title": "02 / CONFIRM THE DATA CONTRACT",
+      "caption": "Map the columns. Choose dates, number separators and currency. Formats are never guessed."
+    },
+    {
+      "image": "02-investigate.png",
+      "sha256": "30601275f1e8c2afa330981375219c0be86bcfa23793e3647e9c9aed8dbac717",
+      "duration_seconds": 12,
+      "title": "03 / START WITH A QUESTION",
+      "caption": "The Duplicate Dispatch case totals GBP 4,701.37. Four leads need evidence review."
+    },
+    {
+      "image": "03-evidence.png",
+      "sha256": "3ad44dd0b799c71e60c84812d6f577bc7a66ab7dcfff0436e384d2070f9883d7",
+      "duration_seconds": 18,
+      "title": "04 / INSPECT THE SOURCE RECORDS",
+      "caption": "Matching rows are candidates, not proof of an error. Repeated orders and returns can be legitimate."
+    },
+    {
+      "image": "04-plan.png",
+      "sha256": "5c81e1cb04b046ae8bce14ed34b549311eecf5cbc506f172551e50ba9a0c11a4",
+      "duration_seconds": 14,
+      "title": "05 / MAKE AN EXPLICIT REPAIR PLAN",
+      "caption": "The case correction note identifies extra copies at rows 137, 138 and 139. Other rows stay intact."
+    },
+    {
+      "image": "05-preview.png",
+      "sha256": "988837a8aca0140fafd4aeefbc7ea78015186ca17c09f0958b25e042b289c46f",
+      "duration_seconds": 18,
+      "title": "06 / PREVIEW THE COMBINED IMPACT",
+      "caption": "GBP 4,701.37 becomes GBP 4,593.97: a change of -107.40. Nothing is saved yet."
+    },
+    {
+      "image": "06-confirm.png",
+      "sha256": "9bb4f6e89088ffe58b0d57f1597f75bb330ea718b986245b35200f0e2ced27e2",
+      "duration_seconds": 8,
+      "title": "07 / CONFIRM THE REVIEWED CHANGE",
+      "caption": "Save only after reviewing the affected rows. The preview is bound to its source version."
+    },
+    {
+      "image": "07-history.png",
+      "sha256": "64312995528c35440a7bee3d36c1ba59c4ca12a6d13e0d587321061c9a7732ee",
+      "duration_seconds": 12,
+      "title": "08 / KEEP THE EVIDENCE",
+      "caption": "Download the included rows, exact edit history and a report with unresolved findings."
+    },
+    {
+      "image": "08-restore.png",
+      "sha256": "8e8c25c1cbdaff13042941a1ec238e5c44592af87e56753d6e94ecd158d1659f",
+      "duration_seconds": 8,
+      "title": "09 / RESTORE WITHOUT ERASING HISTORY",
+      "caption": "Choose Original import. Restoration creates another version and preserves the repair record."
+    },
+    {
+      "image": "09-restored.png",
+      "sha256": "e1ed7ae71f7bfacd7b77bfebabf8f880cf2d1af73c1886a5ed7218fd3dccd25e",
+      "duration_seconds": 8,
+      "title": "10 / BACK TO THE ORIGINAL RESULT",
+      "caption": "GBP 4,701.37 is restored. A working demo demonstrates behavior, not measured user time savings."
+    }
+  ],
+  "video_sha256": "ac1ba09f93c3006b84f1175d0390195a878118ef53275c55d2c6fdbdd9775971",
+  "video_bytes": 2461179,
+  "ffprobe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "width": 1280,
+        "height": 816
+      }
+    ],
+    "format": {
+      "duration": "120.000000"
+    }
+  }
+}
