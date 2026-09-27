@@ -66,3 +66,5 @@ The live UI also completed a separate Qwen request in 16.6 seconds. It returned 
 The [two-minute walkthrough video](assets/walkthrough.mp4) is an **annotated sequence of actual UI screenshots**, not a real-time screen recording. Its scene durations are editorial choices, not task-completion or application-latency measurements. [Scene and video receipt](../reports/walkthrough.json) · [demonstration script](DEMO_SCRIPT.md).
 
 **User-study participants: 0.** Browser verification and developer demonstrations are not a user study. The [3–5 participant protocol](USER_STUDY.md) is planned work; no measured user time saving, improved comprehension, or real-world deployment outcome is claimed.
+
+On September 27, an [independent assistant service-level task run](../reports/independent-task-check/RESULTS.md) passed 18 predeclared checkpoints across the duplicate and date cases. It retained actual repaired/restored CSV exports, complete audit logs and a version-bound report. It additionally checked idempotent retry and stale-action rejection after saving. This is a functional and auditability check, with no new model call or participant session.

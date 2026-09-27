@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "started_at_utc": "2026-09-27T05:09:51.091080+00:00",
+  "source_commit": "5c9149b6ad662d75949c966331d091012b2dd34c",
+  "runner_sha256": "554184bb1051f7081aa0161d2e40c96a15d3ef009d611886b85d9ad174bccf29",
+  "measurement": "assistant service-level functional dry-run on known development fixtures",
+  "participants": 0,
+  "model_calls": 0,
+  "browser_test": false,
+  "protocol_sha256": "c917016097c669747ad280bf718be60e7e92aa197e45e9989d04c3fdbb3f3f6c",
+  "sources": {
+    "dev-duplicate-dispatch": {
+      "input_sha256": "996cd1e2fec58b58407b344eac0afb7b04c12cee0564cffdb207f1db8bd71f7b",
+      "manifest_sha256": "16e27eb04b4bbe358af01193b39690786181f6cb6ed2a93d74fb2a2ce9ebd053"
+    },
+    "dev-broken-dates": {
+      "input_sha256": "fad04d5b4469f9e00ca7459e63bd8199ac14eef4dd62ad1ee4c3bfb9a728cb55",
+      "manifest_sha256": "2ebe177defcf90b50f0ac9a45a15ea15063abd29d6b94bac92fe0525e50f9eea"
+    }
+  },
+  "checkpoints": [
+    {
+      "name": "dev-duplicate-dispatch: frozen source hash",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: original total",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: preview has exact amount impact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: preview does not save",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: legitimate repeats preserved",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: repeated request is idempotent",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: stale independent save rejected",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: saved version survives reopening",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: exported rows and every cell match independent selection",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: complete exclusion audit",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: report binds original source and saved version",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: restore preserves original rows and total",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: restore retains all history and target",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "duplicate: immutable original download",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "dev-broken-dates: frozen source hash",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "date: exact unassigned-to-month impact",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "date: only documented cells changed",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "date: abandoned preview leaves persistent state untouched",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "exports": {
+    "repaired.csv": {
+      "sha256": "ae77be0a6b477f2742cce59476af05706b5d8287675821b78c4ab940e1e0c542",
+      "bytes": 12540
+    },
+    "repair-audit.csv": {
+      "sha256": "72995d9d4e351f120c3e0faaf72fff99eb52c22df9c665d663d38953afffb871",
+      "bytes": 1002
+    },
+    "repair-report.md": {
+      "sha256": "65265745cc67a7f6dd14fa37caac92704883a767d17cfb17470daba834d071f9",
+      "bytes": 2198
+    },
+    "restored-audit.csv": {
+      "sha256": "dff012b89c67b8968652299e7f2c7b20b23c8f6821ac5cd3cb3eeec9c561915f",
+      "bytes": 1202
+    },
+    "restored.csv": {
+      "sha256": "6241a3f31501116d5b21f751c87a6d24eea0a5d1bf374ffd239b2f612435d5dc",
+      "bytes": 12806
+    }
+  },
+  "status": "passed",
+  "finished_at_utc": "2026-09-27T05:09:51.332774+00:00"
+}

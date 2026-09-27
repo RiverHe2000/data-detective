@@ -3,3 +3,6 @@
 
 # These files are byte-hashed by corpus.lock.json. Never rewrite their bytes.
 /data/cases/** -text
+
+# Preserve receipt hashes for real CSV exports (the exporter writes CRLF).
+/reports/independent-task-check/** -text

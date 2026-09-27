@@ -2,6 +2,8 @@
 
 **Status: not conducted.** This document is a future protocol, not evidence of usability gains. Automated browser runs, the scripted demonstration, benchmark cases and developer self-testing are not participant sessions.
 
+At the owner's request, an [independent assistant service-level task check](../reports/independent-task-check/RESULTS.md) was completed on September 27, 2026 instead of recruiting unavailable participants. It verifies exact repairs and audit exports; it does not complete or replace this human study.
+
 ## Question and participants
 
 Can someone inspect the evidence, make one justified change and recover the original state without confusing a review candidate with a proven error?

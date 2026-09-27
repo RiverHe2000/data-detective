@@ -12,6 +12,8 @@ This is a **local, single-user application** built with Streamlit. Python checks
 
 **Measured:** all 32 known injected events were detected and all 12 oracle repairs restored the reference rows in a small frozen corpus. These are regression checks on known edits. They do not measure real-world cleaning accuracy or automatic repair judgement. The main engineering tradeoff is deliberate: deterministic checks and exact arithmetic own the result; the optional model only proposes which evidence to inspect.
 
+**Audit trail checked:** an [independent assistant task run](reports/independent-task-check/RESULTS.md) passed 18 checkpoints for preview, saved repairs, retry/stale-action handling, exact exported rows and restoration. The actual exports and hash receipt are retained. This was a service-level functional check on known fixtures, with zero human participants.
+
 ## Run locally
 
 Python 3.12 or newer. From the repository root in PowerShell:

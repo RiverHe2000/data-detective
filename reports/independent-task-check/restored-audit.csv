@@ -1,0 +1,6 @@
+﻿version_id,parent_version_id,created_at,kind,reason,row_id,column,before,after,restored_from
+45834974bff44b5787387f8dd0e7ccb9,,2026-09-27T05:09:51+00:00,import,Original import,,,,,
+db44f191075c462f8f4c171986f0f43e,45834974bff44b5787387f8dd0e7ccb9,2026-09-27T05:09:51+00:00,repair,Case correction note confirms only source rows 137-139 are accidental copies.,996cd1e2fec58b58407b344eac0afb7b04c12cee0564cffdb207f1db8bd71f7b:137,__excluded__,false,true,
+db44f191075c462f8f4c171986f0f43e,45834974bff44b5787387f8dd0e7ccb9,2026-09-27T05:09:51+00:00,repair,Case correction note confirms only source rows 137-139 are accidental copies.,996cd1e2fec58b58407b344eac0afb7b04c12cee0564cffdb207f1db8bd71f7b:138,__excluded__,false,true,
+db44f191075c462f8f4c171986f0f43e,45834974bff44b5787387f8dd0e7ccb9,2026-09-27T05:09:51+00:00,repair,Case correction note confirms only source rows 137-139 are accidental copies.,996cd1e2fec58b58407b344eac0afb7b04c12cee0564cffdb207f1db8bd71f7b:139,__excluded__,false,true,
+8bad2f08be624b3ca80467c0dc37fa85,db44f191075c462f8f4c171986f0f43e,2026-09-27T05:09:51+00:00,restore,Restore original contents; retain reviewed repair in history.,,,,,45834974bff44b5787387f8dd0e7ccb9
