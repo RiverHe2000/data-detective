@@ -20,6 +20,8 @@ Fetching verifies an existing receipt instead of silently updating data. Buildin
 
 Every case contains `baseline.csv`, `input.csv` and `manifest.json`. The manifest records every original row's source location, all synthetic additions, each injected cell edit or copied row, known answers and inverse repair operations. `corpus.lock.json` pins every artifact. Regeneration fails if any existing case would change, including development cases. Create a separately versioned corpus for future changes instead of quietly retuning the held-out cases.
 
+The frozen files use LF line endings. `.gitattributes` disables Git text conversion for `data/cases/`, preserving the exact bytes even when Windows has `core.autocrlf=true`. A checksum failure must be investigated; do not regenerate the lock or normalize the files to make a failing test pass. CI installs the existing dependency lock in its own virtual environment so runner tools cannot enter the application's dependency checks.
+
 ## What the labels mean
 
 **Baseline is not ground truth and is not declared clean.** It is a small excerpt of naturally messy retail data plus explicitly described controls. Native duplicates, unusual prices and missing values can already exist. Evaluation therefore reports baseline findings and separates newly detected edited rows from pre-existing findings. It does not infer full-dataset precision from unlabelled original rows.

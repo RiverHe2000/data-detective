@@ -34,7 +34,9 @@ An independently created Windows x64 / CPython 3.12 environment, with system and
 
 The receipt retains an initial failed verification: UTF-8 mode exposed a locale-dependent Windows process-list decoding assumption in a timeout regression test. The test now inspects ASCII PID bytes; the final verification retained UTF-8 mode and skipped no checks.
 
-After the final UI and packaging changes, the same isolated environment again passed all 133 tests, installation checks, Ruff and the twelve-case evaluation. The refreshed dependency locks contain the same package versions. The [final verification receipt](../reports/final-verification.json) binds this run to source and lock hashes; it records reuse of the isolated environment rather than claiming a second fresh installation. The configured GitHub Actions workflow has not been executed remotely.
+After the final UI and packaging changes, the same isolated environment again passed all 133 tests, installation checks, Ruff and the twelve-case evaluation. The refreshed dependency locks contain the same package versions. The [final verification receipt](../reports/final-verification.json) binds this run to source and lock hashes; it records reuse of the isolated environment rather than claiming a second fresh installation.
+
+The [first remote Windows run](https://github.com/RiverHe2000/data-detective/actions/runs/35598040669) failed: the hosted runner's preinstalled pipx required a newer packaging version than this application's lock, and Git checkout converted byte-hashed corpus files to CRLF. The workflow now creates an isolated virtual environment, and `.gitattributes` preserves the committed corpus bytes. The original case hashes, labels and checks remain unchanged. See [Actions](https://github.com/RiverHe2000/data-detective/actions/workflows/check.yml) for per-revision results; the historical local receipts above are not receipts for later source revisions.
 
 ## Optional Qwen: fallback remains necessary
 

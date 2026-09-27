@@ -8,6 +8,10 @@ This is a **local, single-user application** built with Streamlit. Python checks
 
 [Two-minute annotated UI walkthrough](docs/assets/walkthrough.mp4) · [Measured results and limitations](docs/RESULTS.md) · [中文学习笔记](docs/LEARNING_NOTES.zh-CN.md)
 
+**A concrete example:** documented extra copies in the bundled Duplicate Dispatch case change the net transaction amount from **GBP 4,701.37 to GBP 4,593.97** after an explicit exclusion. Preview the change, save a reason, export the evidence, then restore the original as another version. [Follow the demonstration](docs/DEMO_SCRIPT.md).
+
+**Measured:** all 32 known injected events were detected and all 12 oracle repairs restored the reference rows in a small frozen corpus. These are regression checks on known edits. They do not measure real-world cleaning accuracy or automatic repair judgement. The main engineering tradeoff is deliberate: deterministic checks and exact arithmetic own the result; the optional model only proposes which evidence to inspect.
+
 ## Run locally
 
 Python 3.12 or newer. From the repository root in PowerShell:
@@ -78,7 +82,7 @@ The launcher uses that existing `D:\Project\.venv` interpreter automatically whe
 
 `verify.py` checks this installed checkout, dependencies, lint, tests and all twelve cases, and writes commands, logs, source hashes and results to `reports/verification/`. It does not install dependencies or run the GPU; a source edit during verification invalidates the result. CI uses the same command.
 
-The last command measures rules only. Add `--model` to perform actual local Qwen calls with the configured model interpreter; it records raw responses, protocol failures, fallbacks and cold-process latency. The included model evaluation found no improvement over rules on this small question set. CI is configured in `.github/workflows/check.yml`; it has not been run on a remote host.
+The last command measures rules only. Add `--model` to perform actual local Qwen calls with the configured model interpreter; it records raw responses, protocol failures, fallbacks and cold-process latency. The included model evaluation found no improvement over rules on this small question set. [GitHub Actions](https://github.com/RiverHe2000/data-detective/actions/workflows/check.yml) uses the same verification command inside an isolated environment. The [first remote run](https://github.com/RiverHe2000/data-detective/actions/runs/35598040669) exposed runner dependency contamination and Windows checkout line-ending conversion. The workflow now isolates dependencies and preserves the frozen corpus bytes; the Actions page reports the result for each revision.
 
 The frozen corpus has **six development and six held-out cases**, with disjoint original source rows. [Data documentation](data/README.md) explains the attribution, deliberate edits, synthetic controls and regeneration commands. The [case report](reports/evaluation.md) measures known injections and oracle restoration; it does not treat the original retail data as clean. See [results and limitations](docs/RESULTS.md) for measured outcomes and environment details. The [future user-study protocol](docs/USER_STUDY.md) is a plan; no user-study benefit is claimed.
 

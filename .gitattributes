@@ -1,0 +1,5 @@
+# Keep checkout text stable on Windows and Unix.
+* text=auto eol=lf
+
+# These files are byte-hashed by corpus.lock.json. Never rewrite their bytes.
+/data/cases/** -text
